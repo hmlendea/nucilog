@@ -17,6 +17,11 @@
     <PackageReleaseNotes>Nuts</PackageReleaseNotes>
     <Copyright>Copyright 2017 (c) Horațiu Mlendea. All rights reserved.</Copyright>
     <PackageTags>logger logging logs nuci</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/HoratiuMl/nucilog</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/HoratiuMl/nucilog/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/HoratiuMl/nucilog</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   
   <ItemGroup>
