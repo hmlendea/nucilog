@@ -9,7 +9,7 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <PackageId>NuciLog.HoratiuMl</PackageId>
+    <PackageId>NuciLog.hmlendea</PackageId>
     <PackageVersion>1.0.0</PackageVersion>
     <Authors>Horațiu Mlendea</Authors>
     <Description>Nuci logging utility</Description>
@@ -18,10 +18,11 @@
     <Copyright>Copyright 2017 (c) Horațiu Mlendea. All rights reserved.</Copyright>
     <PackageTags>logger logging logs nuci</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageProjectUrl>https://github.com/HoratiuMl/nucilog</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/HoratiuMl/nucilog/blob/master/LICENSE</PackageLicenseUrl>
-    <RepositoryUrl>https://github.com/HoratiuMl/nucilog</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/hmlendea/nucilog</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/hmlendea/nucilog/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/hmlendea/nucilog</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>en-GB</NeutralLanguage>
   </PropertyGroup>
   
   <ItemGroup>
