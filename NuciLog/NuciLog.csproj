@@ -10,7 +10,7 @@
   
   <PropertyGroup>
     <PackageId>NuciLog.hmlendea</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <Authors>Horațiu Mlendea</Authors>
     <Description>Nuci logging utility</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

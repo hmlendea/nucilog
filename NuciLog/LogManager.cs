@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+
+using NuciLog;
+using NuciLog.Enumerations;
+using NuciLog.Extensions;
 
 namespace NuciLog
 {
@@ -110,81 +115,193 @@ namespace NuciLog
         /// <summary>
         /// Writes the error.
         /// </summary>
-        /// <param name="message">Text.</param>
-        public void Error(string message)
+        /// <param name="operation">Operation.</param>
+        /// <param name="ex">Exception.</param>
+        public void Error(Operation operation, Exception ex = null)
         {
-            WriteLine($"ERROR|{message}");
+            string log = LogBuilder.BuildKvpMessage(operation, OperationStatus.Failure);
+
+            WriteLine($"ERROR|{log}", ex);
         }
 
         /// <summary>
         /// Writes the error.
         /// </summary>
+        /// <param name="operation">Operation.</param>
         /// <param name="message">Text.</param>
         /// <param name="ex">Exception.</param>
-        public void Error(string message, Exception ex)
+        public void Error(Operation operation, string message, Exception ex = null)
         {
-            WriteLine($"ERROR|{message}", ex);
+            Dictionary<LogInfoKey, string> logDetails = new Dictionary<LogInfoKey, string>
+            {
+                { LogInfoKey.Message, message }
+            };
+
+            string log = LogBuilder.BuildKvpMessage(operation, OperationStatus.Failure, logDetails);
+
+            WriteLine($"ERROR|{log}", ex);
         }
 
         /// <summary>
-        /// Writes the warning.
+        /// Writes the error.
         /// </summary>
-        /// <param name="message">Text.</param>
-        public void Info(string message)
+        /// <param name="operation">Operation.</param>
+        /// <param name="logDetails">Details.</param>
+        /// <param name="ex">Exception.</param>
+        public void Error(Operation operation, Dictionary<LogInfoKey, string> logDetails, Exception ex = null)
         {
-            WriteLine($"INFO|{message}");
+            string log = LogBuilder.BuildKvpMessage(operation, OperationStatus.Failure, logDetails);
+
+            WriteLine($"ERROR|{log}", ex);
         }
 
         /// <summary>
-        /// Writes the warning.
+        /// Writes the error.
         /// </summary>
+        /// <param name="operation">Operation.</param>
         /// <param name="message">Text.</param>
+        /// <param name="logDetails">Details.</param>
         /// <param name="ex">Exception.</param>
-        public void Info(string message, Exception ex)
+        public void Error(Operation operation, string message, Dictionary<LogInfoKey, string> logDetails, Exception ex = null)
         {
-            WriteLine($"INFO|{message}", ex);
+            logDetails.Add(LogInfoKey.Message, message);
+            Error(operation, logDetails, ex);
         }
 
         /// <summary>
         /// Writes the information.
         /// </summary>
-        /// <param name="message">Text.</param>
-        public void Warn(string message)
+        /// <param name="operation">Operation.</param>
+        /// <param name="status">Operation status.</param>
+        /// <param name="ex">Exception.</param>
+        public void Info(Operation operation, OperationStatus status, Exception ex = null)
         {
-            WriteLine($"Info|{message}");
+            string log = LogBuilder.BuildKvpMessage(operation, status);
+
+            WriteLine($"INFO|{log}", ex);
         }
 
         /// <summary>
         /// Writes the information.
         /// </summary>
+        /// <param name="operation">Operation.</param>
+        /// <param name="status">Operation status.</param>
         /// <param name="message">Text.</param>
         /// <param name="ex">Exception.</param>
-        public void Warn(string message, Exception ex)
+        public void Info(Operation operation, OperationStatus status, string message, Exception ex = null)
         {
-            WriteLine($"Info|{message}", ex);
+            Dictionary<LogInfoKey, string> logDetails = new Dictionary<LogInfoKey, string>
+            {
+                { LogInfoKey.Message, message }
+            };
+
+            string log = LogBuilder.BuildKvpMessage(operation, status, logDetails);
+
+            WriteLine($"INFO|{log}", ex);
+        }
+
+        /// <summary>
+        /// Writes the information.
+        /// </summary>
+        /// <param name="operation">Operation.</param>
+        /// <param name="status">Operation status.</param>
+        /// <param name="logDetails">Details.</param>
+        /// <param name="ex">Exception.</param>
+        public void Info(Operation operation, OperationStatus status, Dictionary<LogInfoKey, string> logDetails, Exception ex = null)
+        {
+            string log = LogBuilder.BuildKvpMessage(operation, status, logDetails);
+
+            WriteLine($"INFO|{log}", ex);
+        }
+
+        /// <summary>
+        /// Writes the information.
+        /// </summary>
+        /// <param name="operation">Operation.</param>
+        /// <param name="status">Operation status.</param>
+        /// <param name="message">Text.</param>
+        /// <param name="logDetails">Details.</param>
+        /// <param name="ex">Exception.</param>
+        public void Info(Operation operation, OperationStatus status, string message, Dictionary<LogInfoKey, string> logDetails, Exception ex = null)
+        {
+            logDetails.Add(LogInfoKey.Message, message);
+            Info(operation, status, logDetails, ex);
+        }
+
+        /// <summary>
+        /// Writes the warning.
+        /// </summary>
+        /// <param name="operation">Operation.</param>
+        /// <param name="status">Operation status.</param>
+        /// <param name="ex">Exception.</param>
+        public void Warn(Operation operation, OperationStatus status, Exception ex = null)
+        {
+            string log = LogBuilder.BuildKvpMessage(operation, status);
+
+            WriteLine($"WARN|{log}", ex);
+        }
+
+        /// <summary>
+        /// Writes the warning.
+        /// </summary>
+        /// <param name="operation">Operation.</param>
+        /// <param name="status">Operation status.</param>
+        /// <param name="message">Text.</param>
+        /// <param name="ex">Exception.</param>
+        public void Warn(Operation operation, OperationStatus status, string message, Exception ex = null)
+        {
+            Dictionary<LogInfoKey, string> logDetails = new Dictionary<LogInfoKey, string>
+            {
+                { LogInfoKey.Message, message }
+            };
+
+            string log = LogBuilder.BuildKvpMessage(operation, status, logDetails);
+
+            WriteLine($"WARN|{log}", ex);
+        }
+
+        /// <summary>
+        /// Writes the warning.
+        /// </summary>
+        /// <param name="operation">Operation.</param>
+        /// <param name="status">Operation status.</param>
+        /// <param name="logDetails">Details.</param>
+        /// <param name="ex">Exception.</param>
+        public void Warn(Operation operation, OperationStatus status, Dictionary<LogInfoKey, string> logDetails, Exception ex = null)
+        {
+            string log = LogBuilder.BuildKvpMessage(operation, status, logDetails);
+
+            WriteLine($"WARN|{log}", ex);
+        }
+
+        /// <summary>
+        /// Writes the warning.
+        /// </summary>
+        /// <param name="operation">Operation.</param>
+        /// <param name="status">Operation status.</param>
+        /// <param name="message">Text.</param>
+        /// <param name="logDetails">Details.</param>
+        /// <param name="ex">Exception.</param>
+        public void Warn(Operation operation, OperationStatus status, string message, Dictionary<LogInfoKey, string> logDetails, Exception ex = null)
+        {
+            logDetails.Add(LogInfoKey.Message, message);
+            Warn(operation, status, logDetails, ex);
         }
 
         /// <summary>
         /// Writes the line.
         /// </summary>
         /// <param name="message">Text.</param>
-        void WriteLine(string message)
-        {
-            string logEntry = $"{DateTime.Now.ToString(TimestampFormat)}|{elapsedGameTime.TotalMilliseconds}|{message}|";
-
-            writer.WriteLine(logEntry);
-
-            Debug.WriteLine(logEntry);
-        }
-
-        /// <summary>
-        /// Writes the line.
-        /// </summary>
-        /// <param name="message">Text.</param>
         /// <param name="ex">Exception.</param>
-        void WriteLine(string message, Exception ex)
+        void WriteLine(string message, Exception ex = null)
         {
-            string processedStackTrace = ex.StackTrace.Replace(Environment.NewLine, "$");
+            string processedStackTrace = string.Empty;
+            
+            if (ex != null)
+            {
+                processedStackTrace = ex.StackTrace.Replace(Environment.NewLine, "$");
+            }
+
             string logEntry = $"{DateTime.Now.ToString(TimestampFormat)}|{elapsedGameTime.TotalMilliseconds}|{message}|{processedStackTrace}";
 
             writer.WriteLine(logEntry);
