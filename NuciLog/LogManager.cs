@@ -92,7 +92,7 @@ namespace NuciLog
         }
 
         /// <summary>
-        /// Writes the error.
+        /// Logs an error.
         /// </summary>
         /// <param name="operation">Operation.</param>
         /// <param name="ex">Exception.</param>
@@ -104,25 +104,7 @@ namespace NuciLog
         }
 
         /// <summary>
-        /// Writes the error.
-        /// </summary>
-        /// <param name="operation">Operation.</param>
-        /// <param name="message">Text.</param>
-        /// <param name="ex">Exception.</param>
-        public void Error(Operation operation, string message, Exception ex = null)
-        {
-            Dictionary<LogInfoKey, string> logDetails = new Dictionary<LogInfoKey, string>
-            {
-                { LogInfoKey.Message, message }
-            };
-
-            string log = LogBuilder.BuildKvpMessage(operation, OperationStatus.Failure, logDetails);
-
-            WriteLine($"ERROR|{log}", ex);
-        }
-
-        /// <summary>
-        /// Writes the error.
+        /// Logs an error.
         /// </summary>
         /// <param name="operation">Operation.</param>
         /// <param name="logDetails">Details.</param>
@@ -135,7 +117,23 @@ namespace NuciLog
         }
 
         /// <summary>
-        /// Writes the error.
+        /// Logs an error.
+        /// </summary>
+        /// <param name="operation">Operation.</param>
+        /// <param name="message">Text.</param>
+        /// <param name="ex">Exception.</param>
+        public void Error(Operation operation, string message, Exception ex = null)
+        {
+            Dictionary<LogInfoKey, string> logDetails = new Dictionary<LogInfoKey, string>
+            {
+                { LogInfoKey.Message, message }
+            };
+
+            Error(operation, logDetails, ex);
+        }
+
+        /// <summary>
+        /// Logs an error.
         /// </summary>
         /// <param name="operation">Operation.</param>
         /// <param name="message">Text.</param>
@@ -144,11 +142,12 @@ namespace NuciLog
         public void Error(Operation operation, string message, Dictionary<LogInfoKey, string> logDetails, Exception ex = null)
         {
             logDetails.Add(LogInfoKey.Message, message);
+
             Error(operation, logDetails, ex);
         }
 
         /// <summary>
-        /// Writes the information.
+        /// Logs an information.
         /// </summary>
         /// <param name="operation">Operation.</param>
         /// <param name="status">Operation status.</param>
@@ -161,26 +160,7 @@ namespace NuciLog
         }
 
         /// <summary>
-        /// Writes the information.
-        /// </summary>
-        /// <param name="operation">Operation.</param>
-        /// <param name="status">Operation status.</param>
-        /// <param name="message">Text.</param>
-        /// <param name="ex">Exception.</param>
-        public void Info(Operation operation, OperationStatus status, string message, Exception ex = null)
-        {
-            Dictionary<LogInfoKey, string> logDetails = new Dictionary<LogInfoKey, string>
-            {
-                { LogInfoKey.Message, message }
-            };
-
-            string log = LogBuilder.BuildKvpMessage(operation, status, logDetails);
-
-            WriteLine($"INFO|{log}", ex);
-        }
-
-        /// <summary>
-        /// Writes the information.
+        /// Logs an information.
         /// </summary>
         /// <param name="operation">Operation.</param>
         /// <param name="status">Operation status.</param>
@@ -194,7 +174,24 @@ namespace NuciLog
         }
 
         /// <summary>
-        /// Writes the information.
+        /// Logs an information.
+        /// </summary>
+        /// <param name="operation">Operation.</param>
+        /// <param name="status">Operation status.</param>
+        /// <param name="message">Text.</param>
+        /// <param name="ex">Exception.</param>
+        public void Info(Operation operation, OperationStatus status, string message, Exception ex = null)
+        {
+            Dictionary<LogInfoKey, string> logDetails = new Dictionary<LogInfoKey, string>
+            {
+                { LogInfoKey.Message, message }
+            };
+
+            Info(operation, status, logDetails, ex);
+        }
+
+        /// <summary>
+        /// Logs an information.
         /// </summary>
         /// <param name="operation">Operation.</param>
         /// <param name="status">Operation status.</param>
@@ -204,11 +201,12 @@ namespace NuciLog
         public void Info(Operation operation, OperationStatus status, string message, Dictionary<LogInfoKey, string> logDetails, Exception ex = null)
         {
             logDetails.Add(LogInfoKey.Message, message);
+
             Info(operation, status, logDetails, ex);
         }
 
         /// <summary>
-        /// Writes the warning.
+        /// Logs a warning.
         /// </summary>
         /// <param name="operation">Operation.</param>
         /// <param name="status">Operation status.</param>
@@ -221,26 +219,7 @@ namespace NuciLog
         }
 
         /// <summary>
-        /// Writes the warning.
-        /// </summary>
-        /// <param name="operation">Operation.</param>
-        /// <param name="status">Operation status.</param>
-        /// <param name="message">Text.</param>
-        /// <param name="ex">Exception.</param>
-        public void Warn(Operation operation, OperationStatus status, string message, Exception ex = null)
-        {
-            Dictionary<LogInfoKey, string> logDetails = new Dictionary<LogInfoKey, string>
-            {
-                { LogInfoKey.Message, message }
-            };
-
-            string log = LogBuilder.BuildKvpMessage(operation, status, logDetails);
-
-            WriteLine($"WARN|{log}", ex);
-        }
-
-        /// <summary>
-        /// Writes the warning.
+        /// Logs a warning.
         /// </summary>
         /// <param name="operation">Operation.</param>
         /// <param name="status">Operation status.</param>
@@ -254,7 +233,24 @@ namespace NuciLog
         }
 
         /// <summary>
-        /// Writes the warning.
+        /// Logs a warning.
+        /// </summary>
+        /// <param name="operation">Operation.</param>
+        /// <param name="status">Operation status.</param>
+        /// <param name="message">Text.</param>
+        /// <param name="ex">Exception.</param>
+        public void Warn(Operation operation, OperationStatus status, string message, Exception ex = null)
+        {
+            Dictionary<LogInfoKey, string> logDetails = new Dictionary<LogInfoKey, string>
+            {
+                { LogInfoKey.Message, message }
+            };
+
+            Warn(operation, status, logDetails, ex);
+        }
+
+        /// <summary>
+        /// Logs a warning.
         /// </summary>
         /// <param name="operation">Operation.</param>
         /// <param name="status">Operation status.</param>
@@ -264,11 +260,12 @@ namespace NuciLog
         public void Warn(Operation operation, OperationStatus status, string message, Dictionary<LogInfoKey, string> logDetails, Exception ex = null)
         {
             logDetails.Add(LogInfoKey.Message, message);
+
             Warn(operation, status, logDetails, ex);
         }
 
         /// <summary>
-        /// Writes the line.
+        /// Writes a line to the logfile and Debug output.
         /// </summary>
         /// <param name="message">Text.</param>
         /// <param name="ex">Exception.</param>
