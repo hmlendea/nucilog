@@ -9,7 +9,7 @@ namespace NuciLog
     /// <summary>
     /// Log message builder.
     /// </summary>
-    public static class LogBuilder
+    internal static class LogBuilder
     {
         /// <summary>
         /// Builds a log message based on key-value pairs.

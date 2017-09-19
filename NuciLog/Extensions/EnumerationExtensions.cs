@@ -8,7 +8,7 @@ namespace NuciLog.Extensions
     /// <summary>
     /// Enumerable extensions.
     /// </summary>
-    public static class EnumerationExtensions
+    internal static class EnumerationExtensions
     {
         /// <summary>
         /// Gets the display name of the enumeration item.

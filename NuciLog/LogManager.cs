@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
-using NuciLog;
 using NuciLog.Enumerations;
-using NuciLog.Extensions;
 
 namespace NuciLog
 {
@@ -18,7 +16,6 @@ namespace NuciLog
         static object syncRoot = new object();
 
         StreamWriter writer;
-        TimeSpan elapsedGameTime;
 
         /// <summary>
         /// Gets the instance.
@@ -42,12 +39,6 @@ namespace NuciLog
                 return instance;
             }
         }
-
-        /// <summary>
-        /// Gets or sets the verbosity level.
-        /// </summary>
-        /// <value>The verbosity level.</value>
-        public int VerbosityLevel { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether logging is enabled.
@@ -87,11 +78,8 @@ namespace NuciLog
             // TODO: What if the game keeps running into the next day?
             writer = new StreamWriter(LogPath, true);
             writer.AutoFlush = true;
-
-            VerbosityLevel = 1;
+            
             TimestampFormat = "yyyy/MM/dd HH:mm:ss.ffffzzz";
-
-            elapsedGameTime = new TimeSpan();
         }
 
         /// <summary>
@@ -101,15 +89,6 @@ namespace NuciLog
         {
             writer.Close();
             writer.Dispose();
-        }
-
-        /// <summary>
-        /// Update the content.
-        /// </summary>
-        /// <param name="elapsedGameTime">Elapsed game time.</param>
-        public void Update(TimeSpan elapsedGameTime)
-        {
-            this.elapsedGameTime = elapsedGameTime;
         }
 
         /// <summary>
@@ -295,6 +274,11 @@ namespace NuciLog
         /// <param name="ex">Exception.</param>
         void WriteLine(string message, Exception ex = null)
         {
+            if (!Enabled)
+            {
+                return;
+            }
+
             string processedStackTrace = string.Empty;
             
             if (ex != null)
@@ -302,7 +286,7 @@ namespace NuciLog
                 processedStackTrace = ex.StackTrace.Replace(Environment.NewLine, "$");
             }
 
-            string logEntry = $"{DateTime.Now.ToString(TimestampFormat)}|{elapsedGameTime.TotalMilliseconds}|{message}|{processedStackTrace}";
+            string logEntry = $"{DateTime.Now.ToString(TimestampFormat)}|{message}|{processedStackTrace}";
 
             writer.WriteLine(logEntry);
 
