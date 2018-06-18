@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuciLog", "NuciLog\NuciLog.csproj", "{CACC3B27-3091-45F5-B4B5-B4AE52D58823}"
+Project("{45715d68-8a1d-4249-b2c1-95074feadbfc}") = "NuciLog", "NuciLog\NuciLog.csproj", "{477d5595-65f4-4b83-8f60-d8ead39d51a0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CACC3B27-3091-45F5-B4B5-B4AE52D58823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CACC3B27-3091-45F5-B4B5-B4AE52D58823}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CACC3B27-3091-45F5-B4B5-B4AE52D58823}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CACC3B27-3091-45F5-B4B5-B4AE52D58823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{477d5595-65f4-4b83-8f60-d8ead39d51a0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{477d5595-65f4-4b83-8f60-d8ead39d51a0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{477d5595-65f4-4b83-8f60-d8ead39d51a0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{477d5595-65f4-4b83-8f60-d8ead39d51a0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8C751A6D-5B32-473C-A460-E1B059CCA931}
+		SolutionGuid = {35942ba1-a0cb-4487-948a-0c6998055763}
 	EndGlobalSection
 EndGlobal

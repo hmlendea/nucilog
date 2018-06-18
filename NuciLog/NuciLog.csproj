@@ -1,32 +1,47 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{477d5595-65f4-4b83-8f60-d8ead39d51a0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NuciLog</RootNamespace>
+    <AssemblyName>NuciLog</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\NuciLog.xml</DocumentationFile>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  
-  <PropertyGroup>
-    <PackageId>NuciLog.hmlendea</PackageId>
-    <PackageVersion>1.1.0</PackageVersion>
-    <Authors>Horațiu Mlendea</Authors>
-    <Description>Nuci logging utility</Description>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Nuts</PackageReleaseNotes>
-    <Copyright>Copyright 2017 (c) Horațiu Mlendea. All rights reserved.</Copyright>
-    <PackageTags>logger logging logs nuci</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageProjectUrl>https://github.com/hmlendea/nucilog</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/hmlendea/nucilog/blob/master/LICENSE</PackageLicenseUrl>
-    <RepositoryUrl>https://github.com/hmlendea/nucilog</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <NeutralLanguage>en-GB</NeutralLanguage>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LogBuilder.cs" />
+    <Compile Include="LogManager.cs" />
+    <Compile Include="Enumerations\LogInfoKey.cs" />
+    <Compile Include="Enumerations\Operation.cs" />
+    <Compile Include="Enumerations\OperationStatus.cs" />
+    <Compile Include="Extensions\EnumerationExtensions.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
