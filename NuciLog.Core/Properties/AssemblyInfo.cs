@@ -4,10 +4,10 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("NuciLog")]
+[assembly: AssemblyTitle("NuciLog.Core")]
 [assembly: AssemblyDescription("Logging utility")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Horațiu Mlendea")]
 [assembly: AssemblyProduct("NuciLog")]
 [assembly: AssemblyCopyright("Copyright © Horațiu Mlendea 2018")]
 [assembly: AssemblyTrademark("")]
