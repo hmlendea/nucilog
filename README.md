@@ -1,3 +1,6 @@
+[![Build 
+Status](https://travis-ci.com/hmlendea/nucilog.svg?branch=master)](https://travis-ci.com/hmlendea/nucilog)
+
 # NuciLog
 
 Logging NuGet package
