@@ -15,9 +15,16 @@
   </PropertyGroup>
 =======
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>2.0.0</Version>
-        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+      <TargetFramework>netstandard2.0</TargetFramework>
+      <RootNamespace>NuciLog.Core</RootNamespace>
+      <Version>2.1.0</Version>
+      <Description>NuciLog Core package</Description>
+      <Authors>Horațiu Mlendea</Authors>
+      <Copyright>Copyright 2019 © Horațiu Mlendea</Copyright>
+      <RepositoryUrl>https://github.com/hmlendea/nucilog</RepositoryUrl>
+      <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+      <PackageTags>Logging</PackageTags>
+      <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     </PropertyGroup>
 >>>>>>> Converted NuciLog.Core to .NET Standard 2.0
 
