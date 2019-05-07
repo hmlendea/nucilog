@@ -1,19 +1,10 @@
-﻿namespace NuciLog.Core
+﻿using System;
+using System.Collections.Generic;
+
+namespace NuciLog.Core
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Serilog;
-
-    public sealed class NuciLogger : INuciLogger
+    public abstract class Logger : ILogger
     {
-        ILogger logger;
-
-        public NuciLogger()
-        {
-            this.logger = Log.Logger;
-        }
-
         public Type SourceContext { get; private set; }
 
         public void SetSourceContext<T>()
@@ -21,10 +12,14 @@
             SetSourceContext(typeof(T));
         }
 
-        public void SetSourceContext(Type type)
+        public virtual void SetSourceContext(Type type)
         {
-            this.logger = Log.Logger.ForContext(type);
             SourceContext = type;
+        }
+
+        public void Verbose(string message)
+        {
+            Verbose(Operation.Unknown, operationStatus: null, message: message);
         }
 
         public void Verbose(Operation operation, OperationStatus operationStatus, string message)
@@ -45,8 +40,12 @@
         public void Verbose(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
         {
             string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
+            WriteLog(LogLevel.Verbose, logMessage);
+        }
 
-            this.logger.Verbose(logMessage);
+        public void Debug(string message)
+        {
+            Verbose(Operation.Unknown, operationStatus: null, message: message);
         }
 
         public void Debug(Operation operation, OperationStatus operationStatus, string message)
@@ -67,8 +66,12 @@
         public void Debug(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
         {
             string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
+            WriteLog(LogLevel.Debug, logMessage);
+        }
 
-            this.logger.Debug(logMessage);
+        public void Info(string message)
+        {
+            Verbose(Operation.Unknown, operationStatus: null, message: message);
         }
 
         public void Info(Operation operation, OperationStatus operationStatus, string message)
@@ -89,8 +92,12 @@
         public void Info(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
         {
             string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
+            WriteLog(LogLevel.Information, logMessage);
+        }
 
-            this.logger.Information(logMessage);
+        public void Warning(string message)
+        {
+            Verbose(Operation.Unknown, operationStatus: null, message: message);
         }
 
         public void Warning(Operation operation, OperationStatus operationStatus, string message)
@@ -111,8 +118,12 @@
         public void Warning(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
         {
             string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
+            WriteLog(LogLevel.Warning, logMessage);
+        }
 
-            this.logger.Warning(logMessage);
+        public void Error(string message)
+        {
+            Verbose(Operation.Unknown, operationStatus: null, message: message);
         }
 
         public void Error(Operation operation, OperationStatus operationStatus, string message)
@@ -133,8 +144,12 @@
         public void Error(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
         {
             string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
+            WriteLog(LogLevel.Error, logMessage);
+        }
 
-            this.logger.Error(logMessage);
+        public void Fatal(string message)
+        {
+            Verbose(Operation.Unknown, operationStatus: null, message: message);
         }
 
         public void Fatal(Operation operation, OperationStatus operationStatus, string message)
@@ -155,8 +170,9 @@
         public void Fatal(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
         {
             string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
-
-            this.logger.Fatal(logMessage);
+            WriteLog(LogLevel.Fatal, logMessage);
         }
+
+        protected abstract void WriteLog(LogLevel level, string logMessage);
     }
 }

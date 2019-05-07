@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Text;
 
-    internal static class LogMessageBuilder
+    public static class LogMessageBuilder
     {
         public static string Build(
             Operation operation,
@@ -14,7 +14,7 @@
             Exception exception)
         {
             StringBuilder stringBuilder = new StringBuilder();
-
+            
             stringBuilder.Append($"{LogInfoKey.Operation.Name}={operation.Name},");
 
             if (operationStatus != null)

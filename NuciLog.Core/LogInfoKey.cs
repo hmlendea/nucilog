@@ -9,6 +9,8 @@
 
         public string Name { get; protected set; }
 
+        internal static LogInfoKey SourceContext => new LogInfoKey(nameof(SourceContext));
+
         internal static LogInfoKey Operation => new LogInfoKey(nameof(Operation));
 
         internal static LogInfoKey OperationStatus => new LogInfoKey(nameof(OperationStatus));
