@@ -9,12 +9,12 @@
 
         public string Name { get; protected set; }
 
-        public static OperationStatus Unknown => new OperationStatus("UNKNOWN");
+        public static OperationStatus Unknown => new OperationStatus(nameof(Unknown));
 
-        public static OperationStatus Started => new OperationStatus("STARTED");
+        public static OperationStatus Started => new OperationStatus(nameof(Started));
 
-        public static OperationStatus Success => new OperationStatus("FINISHED_SUCCESS");
+        public static OperationStatus Success => new OperationStatus(nameof(Success));
 
-        public static OperationStatus Failure => new OperationStatus("FINISHED_FAILURE");
+        public static OperationStatus Failure => new OperationStatus(nameof(Failure));
     }
 }

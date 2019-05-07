@@ -9,10 +9,10 @@
 
         public string Name { get; protected set; }
 
-        public static Operation Unknown => new Operation("UNKNOWN");
+        public static Operation Unknown => new Operation(nameof(Unknown));
 
-        public static Operation StartUp => new Operation("STARTUP");
+        public static Operation StartUp => new Operation(nameof(StartUp));
 
-        public static Operation ShutDown => new Operation("SHUTDOWN");
+        public static Operation ShutDown => new Operation(nameof(ShutDown));
     }
 }
