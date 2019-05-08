@@ -13,7 +13,7 @@ namespace NuciLog.Core
             string message,
             Exception exception,
             params LogInfo[] details)
-            => Build (operation, operationStatus, message, exception, details.ToList());
+            => Build (operation, operationStatus, message, exception, details?.ToList());
 
         public static string Build(
             Operation operation,
@@ -22,37 +22,42 @@ namespace NuciLog.Core
             Exception exception,
             IEnumerable<LogInfo> details)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            string logMessage = string.Empty;
             
-            stringBuilder.Append($"{LogInfoKey.Operation.Name}={operation.Name},");
+            if (operation is null)
+            {
+                logMessage += $"{LogInfoKey.Operation.Name}={Operation.Unknown.Name},";
+            }
+            else
+            {
+                logMessage += $"{LogInfoKey.Operation.Name}={operation.Name},";
+            }
 
             if (operationStatus != null)
             {
-                stringBuilder.AppendFormat($"{LogInfoKey.OperationStatus.Name}={operationStatus.Name},");
+                logMessage += $"{LogInfoKey.OperationStatus.Name}={operationStatus.Name},";
             }
 
             if (!string.IsNullOrWhiteSpace(message))
             {
-                stringBuilder.AppendFormat($"{LogInfoKey.Message.Name}={message},");
+                logMessage += $"{LogInfoKey.Message.Name}={message},";
             }
 
             if (details != null)
             {
                 foreach (LogInfo detail in details)
                 {
-                    stringBuilder.Append($"{detail.Key.Name}={detail.Value},");
+                    logMessage += $"{detail.Key.Name}={detail.Value},";
                 }
             }
 
             if (exception != null)
             {
-                stringBuilder.AppendFormat($"{LogInfoKey.Exception.Name}={exception.GetType()},");
-                stringBuilder.AppendFormat($"{LogInfoKey.ExceptionMessage.Name}={exception.Message},");
+                logMessage += $"{LogInfoKey.Exception.Name}={exception.GetType()},";
+                logMessage += $"{LogInfoKey.ExceptionMessage.Name}={exception.Message},";
             }
-
-            stringBuilder.Remove(stringBuilder.Length - 1, 1);
-
-            return stringBuilder.ToString();
+            
+            return logMessage.Substring(0, logMessage.Length - 1);
         }
     }
 }
