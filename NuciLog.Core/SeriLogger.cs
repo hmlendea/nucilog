@@ -32,11 +32,11 @@ namespace NuciLog.Core
                     logger.Debug(logMessage);
                     break;
 
-                case LogLevel.Information:
+                case LogLevel.Info:
                     logger.Information(logMessage);
                     break;
 
-                case LogLevel.Warning:
+                case LogLevel.Warn:
                     logger.Warning(logMessage);
                     break;
 

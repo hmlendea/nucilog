@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NuciLog.Core
 {
@@ -18,158 +19,146 @@ namespace NuciLog.Core
         }
 
         public void Verbose(string message)
-        {
-            Verbose(Operation.Unknown, operationStatus: null, message: message);
-        }
+            => Verbose(Operation.Unknown, operationStatus: null, message: message);
 
         public void Verbose(Operation operation, OperationStatus operationStatus, string message)
-        {
-            Verbose(operation, operationStatus, message, details: null);
-        }
+            => Verbose(operation, operationStatus, message, details: null);
 
-        public void Verbose(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details)
-        {
-            Verbose(operation, operationStatus, message, details, null);
-        }
+        public void Verbose(Operation operation, OperationStatus operationStatus, string message, params LogInfo[] details)
+            => Verbose(operation, operationStatus, message, null, details);
+
+        public void Verbose(Operation operation, OperationStatus operationStatus, string message, IEnumerable<LogInfo> details)
+            => Verbose(operation, operationStatus, message, null, details);
 
         public void Verbose(Operation operation, OperationStatus operationStatus, string message, Exception exception)
-        {
-            Verbose(operation, operationStatus, message, null, exception);
-        }
+            => Verbose(operation, operationStatus, message, exception, null);
 
-        public void Verbose(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
+        public void Verbose(Operation operation, OperationStatus operationStatus, string message, Exception exception, params LogInfo[] details)
+            => Verbose(operation, operationStatus, message, exception, details.ToList());
+
+        public void Verbose(Operation operation, OperationStatus operationStatus, string message, Exception exception, IEnumerable<LogInfo> details)
         {
-            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
+            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, exception, details);
             WriteLog(LogLevel.Verbose, logMessage);
         }
 
         public void Debug(string message)
-        {
-            Verbose(Operation.Unknown, operationStatus: null, message: message);
-        }
+            => Debug(Operation.Unknown, operationStatus: null, message: message);
 
         public void Debug(Operation operation, OperationStatus operationStatus, string message)
-        {
-            Debug(operation, operationStatus, message, details: null);
-        }
+            => Debug(operation, operationStatus, message, details: null);
 
-        public void Debug(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details)
-        {
-            Debug(operation, operationStatus, message, details, null);
-        }
+        public void Debug(Operation operation, OperationStatus operationStatus, string message, params LogInfo[] details)
+            => Debug(operation, operationStatus, message, null, details);
+
+        public void Debug(Operation operation, OperationStatus operationStatus, string message, IEnumerable<LogInfo> details)
+            => Debug(operation, operationStatus, message, null, details);
 
         public void Debug(Operation operation, OperationStatus operationStatus, string message, Exception exception)
-        {
-            Debug(operation, operationStatus, message, null, exception);
-        }
+            => Debug(operation, operationStatus, message, exception, null);
 
-        public void Debug(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
+        public void Debug(Operation operation, OperationStatus operationStatus, string message, Exception exception, params LogInfo[] details)
+            => Debug(operation, operationStatus, message, exception, details.ToList());
+
+        public void Debug(Operation operation, OperationStatus operationStatus, string message, Exception exception, IEnumerable<LogInfo> details)
         {
-            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
+            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, exception, details);
             WriteLog(LogLevel.Debug, logMessage);
         }
 
         public void Info(string message)
-        {
-            Verbose(Operation.Unknown, operationStatus: null, message: message);
-        }
+            => Info(Operation.Unknown, operationStatus: null, message: message);
 
         public void Info(Operation operation, OperationStatus operationStatus, string message)
-        {
-            Info(operation, operationStatus, message, details: null);
-        }
+            => Info(operation, operationStatus, message, details: null);
 
-        public void Info(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details)
-        {
-            Info(operation, operationStatus, message, details, null);
-        }
+        public void Info(Operation operation, OperationStatus operationStatus, string message, params LogInfo[] details)
+            => Info(operation, operationStatus, message, null, details);
+
+        public void Info(Operation operation, OperationStatus operationStatus, string message, IEnumerable<LogInfo> details)
+            => Info(operation, operationStatus, message, null, details);
 
         public void Info(Operation operation, OperationStatus operationStatus, string message, Exception exception)
+            => Info(operation, operationStatus, message, exception, null);
+
+        public void Info(Operation operation, OperationStatus operationStatus, string message, Exception exception, params LogInfo[] details)
+            => Info(operation, operationStatus, message, exception, details.ToList());
+
+        public void Info(Operation operation, OperationStatus operationStatus, string message, Exception exception, IEnumerable<LogInfo> details)
         {
-            Info(operation, operationStatus, message, null, exception);
+            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, exception, details);
+            WriteLog(LogLevel.Info, logMessage);
         }
 
-        public void Info(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
-        {
-            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
-            WriteLog(LogLevel.Information, logMessage);
-        }
+        public void Warn(string message)
+            => Warn(Operation.Unknown, operationStatus: null, message: message);
 
-        public void Warning(string message)
-        {
-            Verbose(Operation.Unknown, operationStatus: null, message: message);
-        }
+        public void Warn(Operation operation, OperationStatus operationStatus, string message)
+            => Warn(operation, operationStatus, message, details: null);
 
-        public void Warning(Operation operation, OperationStatus operationStatus, string message)
-        {
-            Warning(operation, operationStatus, message, details: null);
-        }
+        public void Warn(Operation operation, OperationStatus operationStatus, string message, params LogInfo[] details)
+            => Warn(operation, operationStatus, message, null, details);
 
-        public void Warning(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details)
-        {
-            Warning(operation, operationStatus, message, details, null);
-        }
+        public void Warn(Operation operation, OperationStatus operationStatus, string message, IEnumerable<LogInfo> details)
+            => Warn(operation, operationStatus, message, null, details);
 
-        public void Warning(Operation operation, OperationStatus operationStatus, string message, Exception exception)
-        {
-            Warning(operation, operationStatus, message, null, exception);
-        }
+        public void Warn(Operation operation, OperationStatus operationStatus, string message, Exception exception)
+            => Warn(operation, operationStatus, message, exception, null);
 
-        public void Warning(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
+        public void Warn(Operation operation, OperationStatus operationStatus, string message, Exception exception, params LogInfo[] details)
+            => Warn(operation, operationStatus, message, exception, details.ToList());
+
+        public void Warn(Operation operation, OperationStatus operationStatus, string message, Exception exception, IEnumerable<LogInfo> details)
         {
-            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
-            WriteLog(LogLevel.Warning, logMessage);
+            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, exception, details);
+            WriteLog(LogLevel.Warn, logMessage);
         }
 
         public void Error(string message)
-        {
-            Verbose(Operation.Unknown, operationStatus: null, message: message);
-        }
+            => Error(Operation.Unknown, operationStatus: null, message: message);
 
         public void Error(Operation operation, OperationStatus operationStatus, string message)
-        {
-            Error(operation, operationStatus, message, details: null);
-        }
+            => Error(operation, operationStatus, message, details: null);
 
-        public void Error(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details)
-        {
-            Error(operation, operationStatus, message, details, null);
-        }
+        public void Error(Operation operation, OperationStatus operationStatus, string message, params LogInfo[] details)
+            => Error(operation, operationStatus, message, null, details);
+
+        public void Error(Operation operation, OperationStatus operationStatus, string message, IEnumerable<LogInfo> details)
+            => Error(operation, operationStatus, message, null, details);
 
         public void Error(Operation operation, OperationStatus operationStatus, string message, Exception exception)
-        {
-            Error(operation, operationStatus, message, null, exception);
-        }
+            => Error(operation, operationStatus, message, exception, null);
 
-        public void Error(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
+        public void Error(Operation operation, OperationStatus operationStatus, string message, Exception exception, params LogInfo[] details)
+            => Error(operation, operationStatus, message, exception, details.ToList());
+
+        public void Error(Operation operation, OperationStatus operationStatus, string message, Exception exception, IEnumerable<LogInfo> details)
         {
-            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
+            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, exception, details);
             WriteLog(LogLevel.Error, logMessage);
         }
 
         public void Fatal(string message)
-        {
-            Verbose(Operation.Unknown, operationStatus: null, message: message);
-        }
+            => Fatal(Operation.Unknown, operationStatus: null, message: message);
 
         public void Fatal(Operation operation, OperationStatus operationStatus, string message)
-        {
-            Fatal(operation, operationStatus, message, details: null);
-        }
+            => Fatal(operation, operationStatus, message, details: null);
 
-        public void Fatal(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details)
-        {
-            Fatal(operation, operationStatus, message, details, null);
-        }
+        public void Fatal(Operation operation, OperationStatus operationStatus, string message, params LogInfo[] details)
+            => Fatal(operation, operationStatus, message, null, details);
+
+        public void Fatal(Operation operation, OperationStatus operationStatus, string message, IEnumerable<LogInfo> details)
+            => Fatal(operation, operationStatus, message, null, details);
 
         public void Fatal(Operation operation, OperationStatus operationStatus, string message, Exception exception)
-        {
-            Fatal(operation, operationStatus, message, null, exception);
-        }
+            => Fatal(operation, operationStatus, message, exception, null);
 
-        public void Fatal(Operation operation, OperationStatus operationStatus, string message, IDictionary<LogInfoKey, string> details, Exception exception)
+        public void Fatal(Operation operation, OperationStatus operationStatus, string message, Exception exception, params LogInfo[] details)
+            => Fatal(operation, operationStatus, message, exception, details.ToList());
+
+        public void Fatal(Operation operation, OperationStatus operationStatus, string message, Exception exception, IEnumerable<LogInfo> details)
         {
-            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, details, exception);
+            string logMessage = LogMessageBuilder.Build(operation, operationStatus, message, exception, details);
             WriteLog(LogLevel.Fatal, logMessage);
         }
 

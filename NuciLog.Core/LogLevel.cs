@@ -4,8 +4,8 @@
     {
         Verbose,
         Debug,
-        Information,
-        Warning,
+        Info,
+        Warn,
         Error,
         Fatal
     }

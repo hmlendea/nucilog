@@ -1,17 +1,26 @@
-﻿namespace NuciLog.Core
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
+namespace NuciLog.Core
+{
     public static class LogMessageBuilder
     {
         public static string Build(
             Operation operation,
             OperationStatus operationStatus,
             string message,
-            IDictionary<LogInfoKey, string> details,
-            Exception exception)
+            Exception exception,
+            params LogInfo[] details)
+            => Build (operation, operationStatus, message, exception, details.ToList());
+
+        public static string Build(
+            Operation operation,
+            OperationStatus operationStatus,
+            string message,
+            Exception exception,
+            IEnumerable<LogInfo> details)
         {
             StringBuilder stringBuilder = new StringBuilder();
             
@@ -29,7 +38,7 @@
 
             if (details != null)
             {
-                foreach (KeyValuePair<LogInfoKey, string> detail in details)
+                foreach (LogInfo detail in details)
                 {
                     stringBuilder.Append($"{detail.Key.Name}={detail.Value},");
                 }
