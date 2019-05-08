@@ -16,5 +16,7 @@
         public static OperationStatus Success => new OperationStatus(nameof(Success));
 
         public static OperationStatus Failure => new OperationStatus(nameof(Failure));
+
+        public static OperationStatus InProgress => new OperationStatus(nameof(InProgress));
     }
 }
