@@ -214,7 +214,7 @@ namespace NuciLog.Core.UnitTests
         public void Debug_MessageIsPopulated_LogsCorrectly()
         {
             string message = "țestoasă";
-            string expectedLogLine = $"Operation={Operation.Unknown.Name},Message={message}";
+            string expectedLogLine = $"Message={message}";
             
             logger.Debug(message);
 

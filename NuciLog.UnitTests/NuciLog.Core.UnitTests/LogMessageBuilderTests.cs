@@ -13,10 +13,9 @@ namespace NuciLog.Core.UnitTests
         [Test]
         public void Build_OperationIsNull_ValueContainsUnknownOperation()
         {
-            string expected = $"Operation={Operation.Unknown.Name}";
             string actual = LogMessageBuilder.Build(null, null, null, null, null);
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(string.Empty, actual);
         }
 
         [Test]
@@ -82,7 +81,7 @@ namespace NuciLog.Core.UnitTests
         public void Build_MessageIsPopulated_ReturnsTheCorrectValue()
         {
             string message = "țestoasă";
-            string expected = $"Operation={Operation.Unknown.Name},Message={message}";
+            string expected = $"Message={message}";
             string actual = LogMessageBuilder.Build(null, null, message, null, null);
 
             Assert.AreEqual(expected, actual);

@@ -24,16 +24,12 @@ namespace NuciLog.Core
         {
             string logMessage = string.Empty;
             
-            if (operation is null)
-            {
-                logMessage += $"{LogInfoKey.Operation.Name}={Operation.Unknown.Name},";
-            }
-            else
+            if (!(operation is null))
             {
                 logMessage += $"{LogInfoKey.Operation.Name}={operation.Name},";
             }
 
-            if (operationStatus != null)
+            if (!(operationStatus is null))
             {
                 logMessage += $"{LogInfoKey.OperationStatus.Name}={operationStatus.Name},";
             }
@@ -43,7 +39,7 @@ namespace NuciLog.Core
                 logMessage += $"{LogInfoKey.Message.Name}={message},";
             }
 
-            if (details != null)
+            if (!(details is null))
             {
                 foreach (LogInfo detail in details)
                 {
@@ -51,13 +47,18 @@ namespace NuciLog.Core
                 }
             }
 
-            if (exception != null)
+            if (!(exception is null))
             {
                 logMessage += $"{LogInfoKey.Exception.Name}={exception.GetType()},";
                 logMessage += $"{LogInfoKey.ExceptionMessage.Name}={exception.Message},";
             }
-            
-            return logMessage.Substring(0, logMessage.Length - 1);
+
+            if (logMessage.EndsWith(","))
+            {
+                return logMessage.Substring(0, logMessage.Length - 1);
+            }
+
+            return logMessage;
         }
     }
 }

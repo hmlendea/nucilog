@@ -43,7 +43,7 @@ namespace NuciLog.Core
         public void Verbose(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> details)
             => Verbose(operation, operationStatus, message: null, exception: exception, details: details);
         public void Verbose(string message)
-            => Verbose(Operation.Unknown, operationStatus: null, message: message);
+            => Verbose(operation: null, operationStatus: null, message: message);
         public void Verbose(Operation operation, string message)
             => Verbose(operation, operationStatus: null, message: message, details: null);
         public void Verbose(Operation operation, string message, params LogInfo[] details)
@@ -97,7 +97,7 @@ namespace NuciLog.Core
         public void Debug(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> details)
             => Debug(operation, operationStatus, message: null, exception: exception, details: details);
         public void Debug(string message)
-            => Debug(Operation.Unknown, operationStatus: null, message: message);
+            => Debug(operation: null, operationStatus: null, message: message);
         public void Debug(Operation operation, string message)
             => Debug(operation, operationStatus: null, message: message, details: null);
         public void Debug(Operation operation, string message, params LogInfo[] details)
@@ -151,7 +151,7 @@ namespace NuciLog.Core
         public void Info(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> details)
             => Info(operation, operationStatus, message: null, exception: exception, details: details);
         public void Info(string message)
-            => Info(Operation.Unknown, operationStatus: null, message: message);
+            => Info(operation: null, operationStatus: null, message: message);
         public void Info(Operation operation, string message)
             => Info(operation, operationStatus: null, message: message, details: null);
         public void Info(Operation operation, string message, params LogInfo[] details)
@@ -205,7 +205,7 @@ namespace NuciLog.Core
         public void Warn(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> details)
             => Warn(operation, operationStatus, message: null, exception: exception, details: details);
         public void Warn(string message)
-            => Warn(Operation.Unknown, operationStatus: null, message: message);
+            => Warn(operation: null, operationStatus: null, message: message);
         public void Warn(Operation operation, string message)
             => Warn(operation, operationStatus: null, message: message, details: null);
         public void Warn(Operation operation, string message, params LogInfo[] details)
@@ -259,7 +259,7 @@ namespace NuciLog.Core
         public void Error(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> details)
             => Error(operation, operationStatus, message: null, exception: exception, details: details);
         public void Error(string message)
-            => Error(Operation.Unknown, operationStatus: null, message: message);
+            => Error(operation: null, operationStatus: null, message: message);
         public void Error(Operation operation, string message)
             => Error(operation, operationStatus: null, message: message, details: null);
         public void Error(Operation operation, string message, params LogInfo[] details)
@@ -313,7 +313,7 @@ namespace NuciLog.Core
         public void Fatal(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> details)
             => Fatal(operation, operationStatus, message: null, exception: exception, details: details);
         public void Fatal(string message)
-            => Fatal(Operation.Unknown, operationStatus: null, message: message);
+            => Fatal(operation: null, operationStatus: null, message: message);
         public void Fatal(Operation operation, string message)
             => Fatal(operation, operationStatus: null, message: message, details: null);
         public void Fatal(Operation operation, string message, params LogInfo[] details)
