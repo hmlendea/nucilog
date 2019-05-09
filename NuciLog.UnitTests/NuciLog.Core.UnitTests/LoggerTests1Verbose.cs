@@ -214,9 +214,26 @@ namespace NuciLog.Core.UnitTests
         public void Verbose_MessageIsPopulated_LogsCorrectly()
         {
             string message = "țestoasă";
+
             string expectedLogLine = $"Message={message}";
             
             logger.Verbose(message);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_MessageAndExceptionArePopulated_LogsCorrectly()
+        {
+            string message = "țestoasă";
+            Exception ex = new Exception();
+
+            string expectedLogLine =
+                $"Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
+            
+            logger.Verbose(message, ex);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);

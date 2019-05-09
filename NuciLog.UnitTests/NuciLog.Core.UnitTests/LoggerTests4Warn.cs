@@ -214,9 +214,26 @@ namespace NuciLog.Core.UnitTests
         public void Warn_MessageIsPopulated_LogsCorrectly()
         {
             string message = "țestoasă";
+            
             string expectedLogLine = $"Message={message}";
             
             logger.Warn(message);
+
+            Assert.AreEqual(LogLevel.Warn, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Warn_MessageAndExceptionArePopulated_LogsCorrectly()
+        {
+            string message = "țestoasă";
+            Exception ex = new Exception();
+
+            string expectedLogLine =
+                $"Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
+            
+            logger.Warn(message, ex);
 
             Assert.AreEqual(LogLevel.Warn, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);

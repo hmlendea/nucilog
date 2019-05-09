@@ -44,6 +44,8 @@ namespace NuciLog.Core
             => Verbose(operation, operationStatus, message: null, exception: exception, details: details);
         public void Verbose(string message)
             => Verbose(operation: null, operationStatus: null, message: message);
+        public void Verbose(string message, Exception exception)
+            => Verbose(operation: null, operationStatus: null, message: message, exception: exception, details: null);
         public void Verbose(Operation operation, string message)
             => Verbose(operation, operationStatus: null, message: message, details: null);
         public void Verbose(Operation operation, string message, params LogInfo[] details)
@@ -98,6 +100,8 @@ namespace NuciLog.Core
             => Debug(operation, operationStatus, message: null, exception: exception, details: details);
         public void Debug(string message)
             => Debug(operation: null, operationStatus: null, message: message);
+        public void Debug(string message, Exception exception)
+            => Debug(operation: null, operationStatus: null, message: message, exception: exception, details: null);
         public void Debug(Operation operation, string message)
             => Debug(operation, operationStatus: null, message: message, details: null);
         public void Debug(Operation operation, string message, params LogInfo[] details)
@@ -152,6 +156,8 @@ namespace NuciLog.Core
             => Info(operation, operationStatus, message: null, exception: exception, details: details);
         public void Info(string message)
             => Info(operation: null, operationStatus: null, message: message);
+        public void Info(string message, Exception exception)
+            => Info(operation: null, operationStatus: null, message: message, exception: exception, details: null);
         public void Info(Operation operation, string message)
             => Info(operation, operationStatus: null, message: message, details: null);
         public void Info(Operation operation, string message, params LogInfo[] details)
@@ -206,6 +212,8 @@ namespace NuciLog.Core
             => Warn(operation, operationStatus, message: null, exception: exception, details: details);
         public void Warn(string message)
             => Warn(operation: null, operationStatus: null, message: message);
+        public void Warn(string message, Exception exception)
+            => Warn(operation: null, operationStatus: null, message: message, exception: exception, details: null);
         public void Warn(Operation operation, string message)
             => Warn(operation, operationStatus: null, message: message, details: null);
         public void Warn(Operation operation, string message, params LogInfo[] details)
@@ -260,6 +268,8 @@ namespace NuciLog.Core
             => Error(operation, operationStatus, message: null, exception: exception, details: details);
         public void Error(string message)
             => Error(operation: null, operationStatus: null, message: message);
+        public void Error(string message, Exception exception)
+            => Error(operation: null, operationStatus: null, message: message, exception: exception, details: null);
         public void Error(Operation operation, string message)
             => Error(operation, operationStatus: null, message: message, details: null);
         public void Error(Operation operation, string message, params LogInfo[] details)
@@ -314,6 +324,8 @@ namespace NuciLog.Core
             => Fatal(operation, operationStatus, message: null, exception: exception, details: details);
         public void Fatal(string message)
             => Fatal(operation: null, operationStatus: null, message: message);
+        public void Fatal(string message, Exception exception)
+            => Fatal(operation: null, operationStatus: null, message: message, exception: exception, details: null);
         public void Fatal(Operation operation, string message)
             => Fatal(operation, operationStatus: null, message: message, details: null);
         public void Fatal(Operation operation, string message, params LogInfo[] details)
