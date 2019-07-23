@@ -31,7 +31,7 @@ namespace NuciLog.Core
 
             if (!(operationStatus is null))
             {
-                logMessage += $"{LogInfoKey.OperationStatus.Name}={operationStatus.Name},";
+                logMessage += $"{LogInfoKey.OperationStatus.Name}={operationStatus.Name.ToUpper()},";
             }
 
             if (!string.IsNullOrWhiteSpace(message))
