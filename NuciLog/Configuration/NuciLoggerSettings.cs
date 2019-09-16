@@ -19,7 +19,7 @@ namespace NuciLog.Configuration
             TimestampFormat = "yyyy/MM/dd HH:mm:ss.fff";
             LogLineFormat = "{0}|{1}|{2}|{3}";
             LogFilePath = "logfile.log";
-            MinimumLevel = LogLevel.Information;
+            MinimumLevel = LogLevel.Info;
             IsFileOutputEnabled = true;
         }
     }

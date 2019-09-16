@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuciLog.Core" Version="2.2.0" />
+    <PackageReference Include="NuciLog.Core" Version="2.2.5" />
   </ItemGroup>
 
 </Project>
