@@ -1,40 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
+using NuciLog.Configuration;
 using NuciLog.Core;
 
 namespace NuciLog
 {
     public sealed class NuciLogger : Logger
     {
-        public string TimestampFormat { get; set; }
+        readonly NuciLoggerSettings settings;
 
-        public string LogLineFormat { get; set; }
-
-        public string LogFilePath { get; set; }
-
-        public bool IsFileOutputEnabled { get; set; }
-
-        public NuciLogger()
+        public NuciLogger(NuciLoggerSettings settings)
         {
-            TimestampFormat = "yyyy/MM/dd HH:mm:ss.fff";
-            LogLineFormat = "{0}|{1}|{2}|{3}";
-
-            LogFilePath = "logfile.log";
-            IsFileOutputEnabled = true;
+            this.settings = settings;
         }
 
         protected override void WriteLog(LogLevel level, string logMessage)
         {
-            string timestamp = DateTime.Now.ToString(TimestampFormat);
-            string formattedLog = string.Format(LogLineFormat, timestamp, SourceContext, level.ToString().ToUpper(), logMessage);
+            string timestamp = DateTime.Now.ToString(settings.TimestampFormat);
+            string logLevel = level.ToString().ToUpper();
+            string formattedLog = string.Format(settings.LogLineFormat, timestamp, SourceContext, logLevel, logMessage);
 
             Console.WriteLine(formattedLog);
 
-            if (IsFileOutputEnabled && !string.IsNullOrWhiteSpace(LogFilePath))
+            if (settings.IsFileOutputEnabled &&
+                !string.IsNullOrWhiteSpace(settings.LogFilePath))
             {
-                File.AppendAllText(LogFilePath, formattedLog + Environment.NewLine);
+                File.AppendAllText(settings.LogFilePath, formattedLog + Environment.NewLine);
             }
         }
     }
