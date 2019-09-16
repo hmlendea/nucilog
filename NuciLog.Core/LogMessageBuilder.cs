@@ -50,6 +50,7 @@ namespace NuciLog.Core
             {
                 logMessage += $"{LogInfoKey.Exception.Name}={exception.GetType()},";
                 logMessage += $"{LogInfoKey.ExceptionMessage.Name}={exception.Message},";
+                logMessage += $"{LogInfoKey.StackTrace.Name}={exception.StackTrace},";
             }
 
             if (logMessage.EndsWith(","))
