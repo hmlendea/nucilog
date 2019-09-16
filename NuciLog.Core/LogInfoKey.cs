@@ -17,8 +17,10 @@
 
         internal static LogInfoKey Message => new LogInfoKey(nameof(Message));
 
+        internal static LogInfoKey Exception => new LogInfoKey(nameof(Exception));
+
         internal static LogInfoKey ExceptionMessage => new LogInfoKey(nameof(ExceptionMessage));
 
-        internal static LogInfoKey Exception => new LogInfoKey(nameof(Exception));
+        internal static LogInfoKey StackTrace => new LogInfoKey(nameof(StackTrace));
     }
 }
