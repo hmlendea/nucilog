@@ -19,32 +19,32 @@ namespace NuciLog.Core
             base.SetSourceContext(type);
         }
 
-        protected override void WriteLog(LogLevel level, string logMessage)
+        protected override void WriteLog(LogLevel level, Func<string> logMessage)
         {
             switch (level)
             {
                 case LogLevel.Verbose:
-                    logger.Verbose(logMessage);
+                    logger.Verbose(logMessage());
                     break;
 
                 case LogLevel.Debug:
-                    logger.Debug(logMessage);
+                    logger.Debug(logMessage());
                     break;
 
                 case LogLevel.Info:
-                    logger.Information(logMessage);
+                    logger.Information(logMessage());
                     break;
 
                 case LogLevel.Warn:
-                    logger.Warning(logMessage);
+                    logger.Warning(logMessage());
                     break;
 
                 case LogLevel.Error:
-                    logger.Error(logMessage);
+                    logger.Error(logMessage());
                     break;
 
                 case LogLevel.Fatal:
-                    logger.Fatal(logMessage);
+                    logger.Fatal(logMessage());
                     break;
             }
         }
