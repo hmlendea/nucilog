@@ -33,24 +33,14 @@ namespace NuciLog.Core
                 logMessage += $"{LogInfoKey.OperationStatus.Name}={operationStatus.Name.ToUpper()},";
             }
 
-            if (!string.IsNullOrWhiteSpace(message))
-            {
-                logMessage += $"{LogInfoKey.Message.Name}={message},";
-            }
+            IEnumerable<LogInfo> processedDetails = GetProcessedLogInfoList(message, details, exception);
 
-            if (!(details is null))
+            if (!(processedDetails is null))
             {
-                foreach (LogInfo detail in details)
+                foreach (LogInfo detail in processedDetails)
                 {
                     logMessage += $"{detail.Key.Name}={detail.Value},";
                 }
-            }
-
-            if (!(exception is null))
-            {
-                logMessage += $"{LogInfoKey.Exception.Name}={exception.GetType()},";
-                logMessage += $"{LogInfoKey.ExceptionMessage.Name}={exception.Message},";
-                logMessage += $"{LogInfoKey.StackTrace.Name}={exception.StackTrace},";
             }
 
             if (logMessage.EndsWith(","))
@@ -59,6 +49,34 @@ namespace NuciLog.Core
             }
 
             return logMessage;
+        }
+
+        static IEnumerable<LogInfo> GetProcessedLogInfoList(string message, IEnumerable<LogInfo> logInfos, Exception ex)
+        {
+            List<LogInfo> processedLogInfos = new List<LogInfo>();
+
+            if (!(message is null))
+            {
+                processedLogInfos.Add(new LogInfo(LogInfoKey.Message, message));
+            }
+
+            if (!(logInfos is null))
+            {
+                processedLogInfos.AddRange(logInfos);
+            }
+
+            if (!(ex is null))
+            {
+                processedLogInfos.Add(new LogInfo(LogInfoKey.Exception, ex.GetType()));
+                processedLogInfos.Add(new LogInfo(LogInfoKey.ExceptionMessage, ex.Message));
+                processedLogInfos.Add(new LogInfo(LogInfoKey.StackTrace, ex.StackTrace));
+            }
+
+            return processedLogInfos
+                .GroupBy(x => x.Key)
+                .Select(group => new LogInfo(
+                    group.First().Key,
+                    string.Join(";", group.Select(x => x.Value))));
         }
     }
 }
