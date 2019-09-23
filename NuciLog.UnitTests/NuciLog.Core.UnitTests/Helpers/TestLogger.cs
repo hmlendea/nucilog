@@ -12,10 +12,10 @@ namespace NuciLog.Core.UnitTests
 
         public LogLevel LastLogLevel { get; set; }
 
-        protected override void WriteLog(LogLevel level, string logMessage)
+        protected override void WriteLog(LogLevel level, Func<string> logMessage)
         {
             LastLogLevel = level;
-            LastLogLine = logMessage;
+            LastLogLine = logMessage();
         }
     }
 }
