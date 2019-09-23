@@ -81,7 +81,22 @@ namespace NuciLog.Core
                 .GroupBy(x => x.Key)
                 .Select(group => new LogInfo(
                     group.First().Key,
-                    string.Join(";", group.Select(x => x.Value))));
+                    string.Join(";", group.Select(x => GetProcessedLogInfoValue(x.Value)))));
+        }
+
+        static string GetProcessedLogInfoValue(string value)
+        {
+            if (value is null)
+            {
+                return "<NULL>";
+            }
+            
+            if (value == string.Empty)
+            {
+                return "<N/A>";
+            }
+
+            return value;
         }
     }
 }

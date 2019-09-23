@@ -40,7 +40,7 @@ namespace NuciLog.Core.UnitTests
             string expected =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             string actual = LogMessageBuilder.Build(operation, status, null, ex, null);
 
             Assert.AreEqual(expected, actual);
@@ -73,7 +73,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             string actual = LogMessageBuilder.Build(operation, status, null, ex, details);
 
             Assert.AreEqual(expected, actual);
@@ -112,7 +112,7 @@ namespace NuciLog.Core.UnitTests
 
             string expected =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             string actual = LogMessageBuilder.Build(operation, status, message, ex, null);
 
             Assert.AreEqual(expected, actual);
@@ -146,7 +146,7 @@ namespace NuciLog.Core.UnitTests
             string expected =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             string actual = LogMessageBuilder.Build(operation, status, message, ex, details);
 
             Assert.AreEqual(expected, actual);

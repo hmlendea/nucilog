@@ -40,7 +40,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, ex);
 
@@ -102,7 +102,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
                 $"{details.Key.Name}={details.Value}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, ex, details);
 
@@ -121,7 +121,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, ex, details);
 
@@ -141,7 +141,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, ex, details, details2);
 
@@ -173,7 +173,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, status, ex);
 
@@ -245,7 +245,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
                 $"{details.Key.Name}={details.Value}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, status, ex, details);
 
@@ -265,7 +265,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, status, ex, details);
 
@@ -286,7 +286,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, status, ex, details, details2);
 
@@ -315,7 +315,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(message, ex);
 
@@ -346,7 +346,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, null, message, ex);
 
@@ -417,7 +417,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{details.Key.Name}={details.Value}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, null, message, ex, details);
 
@@ -436,7 +436,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, null, message, ex, details);
 
@@ -456,7 +456,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, null, message, ex, details, details2);
 
@@ -489,7 +489,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, status, message, ex);
 
@@ -564,7 +564,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{details.Key.Name}={details.Value}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, status, message, ex, details);
 
@@ -584,7 +584,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, status, message, ex, details);
 
@@ -605,7 +605,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
             logger.Debug(operation, status, message, ex, details, details2);
 
