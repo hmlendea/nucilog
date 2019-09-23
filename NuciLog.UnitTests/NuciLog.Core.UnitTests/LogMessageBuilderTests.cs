@@ -39,6 +39,7 @@ namespace NuciLog.Core.UnitTests
 
             string expected =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"Message=An exception has occurred," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
             string actual = LogMessageBuilder.Build(operation, status, null, ex, null);
 
@@ -70,6 +71,7 @@ namespace NuciLog.Core.UnitTests
 
             string expected =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace={ex.StackTrace}";
             string actual = LogMessageBuilder.Build(operation, status, null, ex, details);
