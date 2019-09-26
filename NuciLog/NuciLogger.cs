@@ -15,7 +15,7 @@ namespace NuciLog
             this.settings = settings;
         }
 
-        protected override void WriteLog(LogLevel level, string logMessage)
+        protected override void WriteLog(LogLevel level, Func<string> logMessage)
         {
             if (level > settings.MinimumLevel)
             {
@@ -24,7 +24,7 @@ namespace NuciLog
 
             string timestamp = DateTime.Now.ToString(settings.TimestampFormat);
             string logLevel = level.ToString().ToUpper();
-            string formattedLog = string.Format(settings.LogLineFormat, timestamp, SourceContext, logLevel, logMessage);
+            string formattedLog = string.Format(settings.LogLineFormat, timestamp, SourceContext, logLevel, logMessage());
 
             Console.WriteLine(formattedLog);
 
