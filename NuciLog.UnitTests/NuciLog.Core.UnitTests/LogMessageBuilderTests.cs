@@ -19,6 +19,136 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
+        public void Build_LogInfosContainNullValues_NullLogInfosAreSkipped()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo>
+            {
+                new LogInfo(TestLogInfoKey.TestKey, "teeest"),
+                new LogInfo(TestLogInfoKey.TestKey2, null)
+            };
+
+            string expected =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest";
+            string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Build_LogInfosContainEmptyValues_EmptyLogInfosAreSkipped()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo>
+            {
+                new LogInfo(TestLogInfoKey.TestKey, "teeest"),
+                new LogInfo(TestLogInfoKey.TestKey2, string.Empty)
+            };
+
+            string expected =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest";
+            string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Build_LogInfosContainWhitespaceValues_WhitespaceLogInfosAreSkipped()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo>
+            {
+                new LogInfo(TestLogInfoKey.TestKey, "teeest"),
+                new LogInfo(TestLogInfoKey.TestKey2, "   ")
+            };
+
+            string expected =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest";
+            string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Build_LogInfosContainDuplicatedKeys_TheLastValueOfTheDuplicatedKeyIsNull_TheDuplicatedKeyIsNotLogged()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo>
+            {
+                new LogInfo(TestLogInfoKey.TestKey, "teeest"),
+                new LogInfo(TestLogInfoKey.TestKey, null)
+            };
+
+            string expected =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
+            string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Build_LogInfosContainDuplicatedKeys_TheLastValueOfTheDuplicatedKeyIsEmpty_TheDuplicatedKeyIsNotLogged()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo>
+            {
+                new LogInfo(TestLogInfoKey.TestKey, "teeest"),
+                new LogInfo(TestLogInfoKey.TestKey, string.Empty)
+            };
+
+            string expected =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
+            string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Build_LogInfosContainDuplicatedKeys_TheLastValueOfTheDuplicatedKeyIsWhitespace_TheDuplicatedKeyIsNotLogged()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo>
+            {
+                new LogInfo(TestLogInfoKey.TestKey, "teeest"),
+                new LogInfo(TestLogInfoKey.TestKey, "            ")
+            };
+
+            string expected =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
+            string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Build_LogInfosContainDuplicatedKeys_TheLastValueOfTheDuplicatedKeyIsPopulated_TheDuplicatedKeyIsLoggedWithTheLastValue()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo>
+            {
+                new LogInfo(TestLogInfoKey.TestKey, "teeest"),
+                new LogInfo(TestLogInfoKey.TestKey, "testus")
+            };
+
+            string expected =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"{TestLogInfoKey.TestKey.Name}=testus";
+            string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
         public void Build_OperationAndOperationStatus_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
