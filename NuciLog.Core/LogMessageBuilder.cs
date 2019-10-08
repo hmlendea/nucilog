@@ -55,14 +55,13 @@ namespace NuciLog.Core
         {
             List<LogInfo> processedLogInfos = new List<LogInfo>();
 
-            if (string.IsNullOrWhiteSpace(message) && !(ex is null))
-            {
-                message = "An exception has occurred";
-            }
-
-            if (!(message is null))
+            if (!string.IsNullOrWhiteSpace(message))
             {
                 processedLogInfos.Add(new LogInfo(LogInfoKey.Message, message));
+            }
+            else if (!(ex is null))
+            {
+                processedLogInfos.Add(new LogInfo(LogInfoKey.Message, "An exception has occurred"));
             }
 
             if (!(logInfos is null))
