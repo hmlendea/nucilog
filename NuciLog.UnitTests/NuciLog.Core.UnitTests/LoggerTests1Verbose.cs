@@ -40,7 +40,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, ex);
 
@@ -127,7 +127,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, ex, logInfos: null);
 
@@ -146,7 +146,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
                 $"{logInfos.Key.Name}={logInfos.Value}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, ex, logInfos);
 
@@ -165,7 +165,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, ex, logInfos);
 
@@ -184,7 +184,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, ex, logInfos, extraLogInfos: null);
 
@@ -204,7 +204,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, ex, logInfos, extraLogInfos);
 
@@ -236,7 +236,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, ex);
 
@@ -338,7 +338,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, ex, logInfos: null);
 
@@ -358,7 +358,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
                 $"{logInfos.Key.Name}={logInfos.Value}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, ex, logInfos);
 
@@ -378,7 +378,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, ex, logInfos);
 
@@ -398,7 +398,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, ex, logInfos, extraLogInfos: null);
 
@@ -419,7 +419,7 @@ namespace NuciLog.Core.UnitTests
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, ex, logInfos, extraLogInfos);
 
@@ -448,7 +448,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(message, ex);
 
@@ -479,7 +479,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, null, message, ex);
 
@@ -627,7 +627,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, null, message, ex, logInfos: null);
 
@@ -646,7 +646,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{logInfos.Key.Name}={logInfos.Value}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, null, message, ex, logInfos);
 
@@ -663,7 +663,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, null, message, ex, logInfos: null);
 
@@ -682,7 +682,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, null, message, ex, logInfos);
 
@@ -699,7 +699,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, null, message, ex, logInfos: null, extraLogInfos: null);
 
@@ -718,7 +718,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey2.Name}=teeest2," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, null, message, ex, logInfos: null, extraLogInfos: extraLogInfos);
 
@@ -737,7 +737,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, null, message, ex, logInfos, extraLogInfos: null);
 
@@ -757,7 +757,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, null, message, ex, logInfos, extraLogInfos);
 
@@ -790,7 +790,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, message, ex);
 
@@ -947,7 +947,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, message, ex, logInfos: null);
 
@@ -967,7 +967,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{logInfos.Key.Name}={logInfos.Value}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, message, ex, logInfos);
 
@@ -985,7 +985,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, message, ex, logInfos: null);
 
@@ -1005,7 +1005,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, message, ex, logInfos);
 
@@ -1023,7 +1023,7 @@ namespace NuciLog.Core.UnitTests
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, message, ex, logInfos: null, extraLogInfos: null);
 
@@ -1043,7 +1043,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey2.Name}=teeest2," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, message, ex, logInfos: null, extraLogInfos: extraLogInfos);
 
@@ -1063,7 +1063,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, message, ex, logInfos, extraLogInfos: null);
 
@@ -1084,7 +1084,7 @@ namespace NuciLog.Core.UnitTests
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
-                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
             logger.Verbose(operation, status, message, ex, logInfos, extraLogInfos);
 
