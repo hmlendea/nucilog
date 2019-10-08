@@ -49,73 +49,117 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Info_OperationAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
-            string expectedLogLine = $"Operation={operation.Name},{details.Key.Name}={details.Value}";
+            string expectedLogLine = $"Operation={operation.Name}";
             
-            logger.Info(operation, details);
+            logger.Info(operation, logInfos: null);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine = $"Operation={operation.Name},{logInfos.Key.Name}={logInfos.Value}";
+            
+            logger.Info(operation, logInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine = $"Operation={operation.Name},{TestLogInfoKey.TestKey.Name}=teeest";
             
-            logger.Info(operation, details);
+            logger.Info(operation, logInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine = $"Operation={operation.Name},{TestLogInfoKey.TestKey.Name}=teeest";
+            
+            logger.Info(operation, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine = $"Operation={operation.Name},{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2";
             
-            logger.Info(operation, details, details2);
+            logger.Info(operation, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndExceptionAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
-                $"{details.Key.Name}={details.Value}," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, ex, details);
+            logger.Info(operation, ex, logInfos: null);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndExceptionAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name}," +
+                $"Message=An exception has occurred," +
+                $"{logInfos.Key.Name}={logInfos.Value}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, ex, logInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name}," +
@@ -123,19 +167,38 @@ namespace NuciLog.Core.UnitTests
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, ex, details);
+            logger.Info(operation, ex, logInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndExceptionAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name}," +
+                $"Message=An exception has occurred," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, ex, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name}," +
@@ -143,7 +206,7 @@ namespace NuciLog.Core.UnitTests
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, ex, details, details2);
+            logger.Info(operation, ex, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
@@ -182,84 +245,134 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
-                $"{details.Key.Name}={details.Value}";
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
             
-            logger.Info(operation, status, details);
+            logger.Info(operation, status, logInfos: null);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"{logInfos.Key.Name}={logInfos.Value}";
+            
+            logger.Info(operation, status, logInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest";
             
-            logger.Info(operation, status, details);
+            logger.Info(operation, status, logInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest";
+            
+            logger.Info(operation, status, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2";
             
-            logger.Info(operation, status, details, details2);
+            logger.Info(operation, status, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndExceptionAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             Exception ex = new Exception();
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
-                $"{details.Key.Name}={details.Value}," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, status, ex, details);
+            logger.Info(operation, status, ex, logInfos: null);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndExceptionAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"Message=An exception has occurred," +
+                $"{logInfos.Key.Name}={logInfos.Value}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, status, ex, logInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
@@ -267,20 +380,40 @@ namespace NuciLog.Core.UnitTests
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, status, ex, details);
+            logger.Info(operation, status, ex, logInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndExceptionAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"Message=An exception has occurred," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, status, ex, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
@@ -288,7 +421,7 @@ namespace NuciLog.Core.UnitTests
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, status, ex, details, details2);
+            logger.Info(operation, status, ex, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
@@ -355,110 +488,278 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Info_OperationAndMessageAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndMessageAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
-                $"Operation={operation.Name},Message={message}," +
-                $"{details.Key.Name}={details.Value}";
+                $"Operation={operation.Name},Message={message}";
             
-            logger.Info(operation, null, message, details);
+            logger.Info(operation, null, message, logInfos: null);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndMessageAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndMessageAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{logInfos.Key.Name}={logInfos.Value}";
+            
+            logger.Info(operation, null, message, logInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndMessageAndNullLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}";
+            
+            logger.Info(operation, null, message, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndMessageAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest";
             
-            logger.Info(operation, null, message, details);
+            logger.Info(operation, null, message, logInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndMessageAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndMessageAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}";
+            
+            logger.Info(operation, null, message, logInfos: null, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndMessageAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{TestLogInfoKey.TestKey2.Name}=teeest2";
+            
+            logger.Info(operation, null, message, logInfos: null, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndMessageAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest";
+            
+            logger.Info(operation, null, message, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndMessageAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2";
             
-            logger.Info(operation, null, message, details, details2);
+            logger.Info(operation, null, message, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndMessageAndExceptionAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndMessageAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
             Exception ex = new Exception();
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
-                $"{details.Key.Name}={details.Value}," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, null, message, ex, details);
+            logger.Info(operation, null, message, ex, logInfos: null);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndMessageAndExceptionAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndMessageAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{logInfos.Key.Name}={logInfos.Value}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, null, message, ex, logInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndMessageAndExceptionAndNullLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            Exception ex = new Exception();
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, null, message, ex, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndMessageAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, null, message, ex, details);
+            logger.Info(operation, null, message, ex, logInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndMessageAndExceptionAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndMessageAndExceptionAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, null, message, ex, logInfos: null, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndMessageAndExceptionAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            Exception ex = new Exception();
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{TestLogInfoKey.TestKey2.Name}=teeest2," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, null, message, ex, logInfos: null, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndMessageAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, null, message, ex, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndMessageAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, null, message, ex, details, details2);
+            logger.Info(operation, null, message, ex, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
@@ -498,116 +799,294 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndMessageAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndMessageAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
-                $"{details.Key.Name}={details.Value}";
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
             
-            logger.Info(operation, status, message, details);
+            logger.Info(operation, status, message, logInfos: null);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndMessageAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndMessageAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{logInfos.Key.Name}={logInfos.Value}";
+            
+            logger.Info(operation, status, message, logInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndMessageAndNullLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
+            
+            logger.Info(operation, status, message, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndMessageAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest";
             
-            logger.Info(operation, status, message, details);
+            logger.Info(operation, status, message, logInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndMessageAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndMessageAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
+            
+            logger.Info(operation, status, message, logInfos: null, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndMessageAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{TestLogInfoKey.TestKey2.Name}=teeest2";
+            
+            logger.Info(operation, status, message, logInfos: null, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndMessageAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest";
+            
+            logger.Info(operation, status, message, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndMessageAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2";
             
-            logger.Info(operation, status, message, details, details2);
+            logger.Info(operation, status, message, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
             Exception ex = new Exception();
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
-                $"{details.Key.Name}={details.Value}," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, status, message, ex, details);
+            logger.Info(operation, status, message, ex, logInfos: null);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{logInfos.Key.Name}={logInfos.Value}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, status, message, ex, logInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            Exception ex = new Exception();
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, status, message, ex, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, status, message, ex, details);
+            logger.Info(operation, status, message, ex, logInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, status, message, ex, logInfos: null, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            Exception ex = new Exception();
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{TestLogInfoKey.TestKey2.Name}=teeest2," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, status, message, ex, logInfos: null, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Info(operation, status, message, ex, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Info_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Info(operation, status, message, ex, details, details2);
+            logger.Info(operation, status, message, ex, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Info, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);

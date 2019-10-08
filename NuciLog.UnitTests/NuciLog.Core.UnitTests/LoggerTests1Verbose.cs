@@ -49,73 +49,117 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
-            string expectedLogLine = $"Operation={operation.Name},{details.Key.Name}={details.Value}";
+            string expectedLogLine = $"Operation={operation.Name}";
             
-            logger.Verbose(operation, details);
+            logger.Verbose(operation, logInfos: null);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine = $"Operation={operation.Name},{logInfos.Key.Name}={logInfos.Value}";
+            
+            logger.Verbose(operation, logInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine = $"Operation={operation.Name},{TestLogInfoKey.TestKey.Name}=teeest";
             
-            logger.Verbose(operation, details);
+            logger.Verbose(operation, logInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine = $"Operation={operation.Name},{TestLogInfoKey.TestKey.Name}=teeest";
+            
+            logger.Verbose(operation, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine = $"Operation={operation.Name},{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2";
             
-            logger.Verbose(operation, details, details2);
+            logger.Verbose(operation, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndExceptionAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
                 $"Operation={operation.Name}," +
                 $"Message=An exception has occurred," +
-                $"{details.Key.Name}={details.Value}," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, ex, details);
+            logger.Verbose(operation, ex, logInfos: null);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndExceptionAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name}," +
+                $"Message=An exception has occurred," +
+                $"{logInfos.Key.Name}={logInfos.Value}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, ex, logInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name}," +
@@ -123,19 +167,38 @@ namespace NuciLog.Core.UnitTests
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, ex, details);
+            logger.Verbose(operation, ex, logInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndExceptionAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name}," +
+                $"Message=An exception has occurred," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, ex, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name}," +
@@ -143,7 +206,7 @@ namespace NuciLog.Core.UnitTests
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, ex, details, details2);
+            logger.Verbose(operation, ex, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
@@ -182,84 +245,134 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
-                $"{details.Key.Name}={details.Value}";
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
             
-            logger.Verbose(operation, status, details);
+            logger.Verbose(operation, status, logInfos: null);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"{logInfos.Key.Name}={logInfos.Value}";
+            
+            logger.Verbose(operation, status, logInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest";
             
-            logger.Verbose(operation, status, details);
+            logger.Verbose(operation, status, logInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest";
+            
+            logger.Verbose(operation, status, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2";
             
-            logger.Verbose(operation, status, details, details2);
+            logger.Verbose(operation, status, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndExceptionAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             Exception ex = new Exception();
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
-                $"{details.Key.Name}={details.Value}," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, status, ex, details);
+            logger.Verbose(operation, status, ex, logInfos: null);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndExceptionAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"Message=An exception has occurred," +
+                $"{logInfos.Key.Name}={logInfos.Value}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, status, ex, logInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
@@ -267,20 +380,40 @@ namespace NuciLog.Core.UnitTests
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, status, ex, details);
+            logger.Verbose(operation, status, ex, logInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndExceptionAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
+                $"Message=An exception has occurred," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, status, ex, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
@@ -288,7 +421,7 @@ namespace NuciLog.Core.UnitTests
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, status, ex, details, details2);
+            logger.Verbose(operation, status, ex, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
@@ -355,110 +488,278 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
-                $"Operation={operation.Name},Message={message}," +
-                $"{details.Key.Name}={details.Value}";
+                $"Operation={operation.Name},Message={message}";
             
-            logger.Verbose(operation, null, message, details);
+            logger.Verbose(operation, null, message, logInfos: null);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{logInfos.Key.Name}={logInfos.Value}";
+            
+            logger.Verbose(operation, null, message, logInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndMessageAndNullLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}";
+            
+            logger.Verbose(operation, null, message, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndMessageAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest";
             
-            logger.Verbose(operation, null, message, details);
+            logger.Verbose(operation, null, message, logInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}";
+            
+            logger.Verbose(operation, null, message, logInfos: null, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndMessageAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{TestLogInfoKey.TestKey2.Name}=teeest2";
+            
+            logger.Verbose(operation, null, message, logInfos: null, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndMessageAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest";
+            
+            logger.Verbose(operation, null, message, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndMessageAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2";
             
-            logger.Verbose(operation, null, message, details, details2);
+            logger.Verbose(operation, null, message, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
             Exception ex = new Exception();
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
-                $"{details.Key.Name}={details.Value}," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, null, message, ex, details);
+            logger.Verbose(operation, null, message, ex, logInfos: null);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{logInfos.Key.Name}={logInfos.Value}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, null, message, ex, logInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndMessageAndExceptionAndNullLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            Exception ex = new Exception();
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, null, message, ex, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndMessageAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, null, message, ex, details);
+            logger.Verbose(operation, null, message, ex, logInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, null, message, ex, logInfos: null, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndMessageAndExceptionAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            Exception ex = new Exception();
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{TestLogInfoKey.TestKey2.Name}=teeest2," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, null, message, ex, logInfos: null, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndMessageAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, null, message, ex, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndMessageAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, null, message, ex, details, details2);
+            logger.Verbose(operation, null, message, ex, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
@@ -498,116 +799,294 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
-                $"{details.Key.Name}={details.Value}";
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
             
-            logger.Verbose(operation, status, message, details);
+            logger.Verbose(operation, status, message, logInfos: null);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{logInfos.Key.Name}={logInfos.Value}";
+            
+            logger.Verbose(operation, status, message, logInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndMessageAndNullLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
+            
+            logger.Verbose(operation, status, message, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndMessageAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest";
             
-            logger.Verbose(operation, status, message, details);
+            logger.Verbose(operation, status, message, logInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
+            
+            logger.Verbose(operation, status, message, logInfos: null, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndMessageAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{TestLogInfoKey.TestKey2.Name}=teeest2";
+            
+            logger.Verbose(operation, status, message, logInfos: null, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndMessageAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest";
+            
+            logger.Verbose(operation, status, message, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndMessageAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2";
             
-            logger.Verbose(operation, status, message, details, details2);
+            logger.Verbose(operation, status, message, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
             Exception ex = new Exception();
-            LogInfo details = new LogInfo(TestLogInfoKey.TestKey, "teeest");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
-                $"{details.Key.Name}={details.Value}," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, status, message, ex, details);
+            logger.Verbose(operation, status, message, ex, logInfos: null);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndIEnumerableDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{logInfos.Key.Name}={logInfos.Value}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, status, message, ex, logInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            Exception ex = new Exception();
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, status, message, ex, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, status, message, ex, details);
+            logger.Verbose(operation, status, message, ex, logInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndIEnumerableDetailsAndParamsDetailsArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
-            LogInfo details2 = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, status, message, ex, logInfos: null, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            Exception ex = new Exception();
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{TestLogInfoKey.TestKey2.Name}=teeest2," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, status, message, ex, logInfos: null, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
+            
+            logger.Verbose(operation, status, message, ex, logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        {
+            Operation operation = Operation.StartUp;
+            OperationStatus status = OperationStatus.Started;
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
 
             string expectedLogLine =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
             
-            logger.Verbose(operation, status, message, ex, details, details2);
+            logger.Verbose(operation, status, message, ex, logInfos, extraLogInfos);
 
             Assert.AreEqual(LogLevel.Verbose, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);

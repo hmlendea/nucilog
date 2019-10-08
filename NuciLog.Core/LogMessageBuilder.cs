@@ -11,15 +11,15 @@ namespace NuciLog.Core
             OperationStatus operationStatus,
             string message,
             Exception exception,
-            params LogInfo[] details)
-            => Build (operation, operationStatus, message, exception, details?.ToList());
+            params LogInfo[] logInfos)
+            => Build (operation, operationStatus, message, exception, logInfos?.ToList());
 
         public static string Build(
             Operation operation,
             OperationStatus operationStatus,
             string message,
             Exception exception,
-            IEnumerable<LogInfo> details)
+            IEnumerable<LogInfo> logInfos)
         {
             string logMessage = string.Empty;
             
@@ -33,7 +33,7 @@ namespace NuciLog.Core
                 logMessage += $"{LogInfoKey.OperationStatus.Name}={operationStatus.Name.ToUpper()},";
             }
 
-            IEnumerable<LogInfo> processedDetails = GetProcessedLogInfoList(message, details, exception);
+            IEnumerable<LogInfo> processedDetails = GetProcessedLogInfoList(message, logInfos, exception);
 
             if (!(processedDetails is null))
             {
