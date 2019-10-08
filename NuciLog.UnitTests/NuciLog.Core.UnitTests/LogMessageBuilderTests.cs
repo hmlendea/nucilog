@@ -19,7 +19,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatus_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -31,7 +31,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndExceptionArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndException_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -47,7 +47,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndNullLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndNullLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -59,7 +59,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -74,7 +74,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndDuplicatedLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndDuplicatedLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -93,7 +93,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndExceptionAndNullLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndExceptionAndNullLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -109,7 +109,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndExceptionAndLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndExceptionAndLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -127,7 +127,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndExceptionAndDuplicatedLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndExceptionAndDuplicatedLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -159,7 +159,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndMessageArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndMessage_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -172,7 +172,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndMessageAndExceptionArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndMessageAndException_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -188,7 +188,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndMessageAndNullLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndMessageAndNullLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -202,7 +202,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndMessageAndLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndMessageAndLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -218,7 +218,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndMessageAndDuplicatedLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndMessageAndDuplicatedLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -238,7 +238,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -254,7 +254,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndMessageAndExceptionAndLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -272,7 +272,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndMessageAndExceptionAndDuplicatedLogInfosArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndMessageAndExceptionAndDuplicatedLogInfos_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;

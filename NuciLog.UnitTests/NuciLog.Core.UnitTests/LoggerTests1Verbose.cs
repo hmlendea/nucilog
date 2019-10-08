@@ -32,7 +32,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndExceptionArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndException_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
@@ -49,7 +49,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
 
@@ -62,7 +62,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
@@ -76,7 +76,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
@@ -90,7 +90,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
@@ -104,7 +104,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
@@ -119,7 +119,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndExceptionAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
@@ -136,7 +136,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndExceptionAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
@@ -155,7 +155,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndExceptionAndLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
@@ -174,7 +174,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndExceptionAndLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
@@ -193,7 +193,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndExceptionAndLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             Exception ex = new Exception();
@@ -213,7 +213,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatus_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -227,7 +227,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndExceptionArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndException_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -245,7 +245,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -260,7 +260,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -277,7 +277,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -294,7 +294,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -311,7 +311,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -329,7 +329,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndExceptionAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -347,7 +347,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndExceptionAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -367,7 +367,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndExceptionAndLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -387,7 +387,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndExceptionAndLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -407,7 +407,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndExceptionAndLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -441,7 +441,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_MessageAndExceptionArePopulated_LogsCorrectly()
+        public void Verbose_MessageAndException_LogsCorrectly()
         {
             string message = "țestoasă";
             Exception ex = new Exception();
@@ -457,7 +457,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessage_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -471,7 +471,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndException_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -488,7 +488,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -503,7 +503,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -520,7 +520,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndNullLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndNullLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -535,7 +535,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -552,7 +552,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndNullLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -567,7 +567,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndNullLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -584,7 +584,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -601,7 +601,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -619,7 +619,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -636,7 +636,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -655,7 +655,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndNullLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndNullLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -672,7 +672,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -691,7 +691,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndNullLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -708,7 +708,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndNullLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -727,7 +727,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -746,7 +746,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndMessageAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndMessageAndExceptionAndLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             string message = "testudo";
@@ -766,7 +766,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessage_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -781,7 +781,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndException_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -799,7 +799,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -815,7 +815,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -833,7 +833,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndNullLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndNullLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -849,7 +849,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -867,7 +867,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndNullLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -883,7 +883,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndNullLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -901,7 +901,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -919,7 +919,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -938,7 +938,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -956,7 +956,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -976,7 +976,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -994,7 +994,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -1014,7 +1014,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -1032,7 +1032,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndNullLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -1052,7 +1052,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosAndNullExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosAndNullExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
@@ -1072,7 +1072,7 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosAndExtraLogInfosArePopulated_LogsCorrectly()
+        public void Verbose_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
