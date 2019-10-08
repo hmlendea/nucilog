@@ -14,16 +14,16 @@ namespace NuciLog.Core
             Value = value;
         }
 
+        public LogInfo(LogInfoKey key, object value)
+        {
+            Key = key;
+            Value = value?.ToString();
+        }
+
         public LogInfo(LogInfoKey key, DateTime value, string format)
         {
             Key = key;
             Value = value.ToString(format);
-        }
-
-        public LogInfo(LogInfoKey key, object value)
-        {
-            Key = key;
-            Value = value.ToString();
         }
     }
 }
