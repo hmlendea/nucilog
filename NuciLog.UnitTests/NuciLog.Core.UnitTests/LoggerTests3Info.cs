@@ -65,9 +65,13 @@ namespace NuciLog.Core.UnitTests
         public void Info_OperationAndExtraLogInfos_LogsCorrectly()
         {
             Operation operation = Operation.StartUp;
-            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+            LogInfo[] logInfos = new LogInfo[]
+            {
+                new LogInfo(TestLogInfoKey.TestKey, "teeestValue"),
+                new LogInfo(TestLogInfoKey.TestKey2, "teeestValue2")
+            };
 
-            string expectedLogLine = $"Operation={operation.Name},{logInfos.Key.Name}={logInfos.Value}";
+            string expectedLogLine = $"Operation={operation.Name},{logInfos[0].Key.Name}={logInfos[0].Value},{logInfos[1].Key.Name}={logInfos[1].Value}";
             
             logger.Info(operation, logInfos);
 
