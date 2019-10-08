@@ -47,34 +47,34 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndDetailsArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndLogInfosArePopulated_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expected =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest";
-            string actual = LogMessageBuilder.Build(operation, status, null, null, details);
+            string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
 
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndExceptionAndDetailsArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndExceptionAndLogInfosArePopulated_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expected =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}," +
                 $"Message=An exception has occurred," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
-            string actual = LogMessageBuilder.Build(operation, status, null, ex, details);
+            string actual = LogMessageBuilder.Build(operation, status, null, ex, logInfos);
 
             Assert.AreEqual(expected, actual);
         }
@@ -119,35 +119,35 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndMessageAndDetailsArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndMessageAndLogInfosArePopulated_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expected =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest";
-            string actual = LogMessageBuilder.Build(operation, status, message, null, details);
+            string actual = LogMessageBuilder.Build(operation, status, message, null, logInfos);
 
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void Build_OperationAndOperationStatusAndMessageAndExceptionAndDetailsArePopulated_ReturnsTheCorrectValue()
+        public void Build_OperationAndOperationStatusAndMessageAndExceptionAndLogInfosArePopulated_ReturnsTheCorrectValue()
         {
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
             Exception ex = new Exception();
-            IEnumerable<LogInfo> details = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
 
             string expected =
                 $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}," +
                 $"{TestLogInfoKey.TestKey.Name}=teeest," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message},StackTrace=<NULL>";
-            string actual = LogMessageBuilder.Build(operation, status, message, ex, details);
+            string actual = LogMessageBuilder.Build(operation, status, message, ex, logInfos);
 
             Assert.AreEqual(expected, actual);
         }
