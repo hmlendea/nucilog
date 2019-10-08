@@ -254,8 +254,7 @@ namespace NuciLog.Core.UnitTests
             Operation operation = Operation.StartUp;
             OperationStatus status = OperationStatus.Started;
 
-            string expectedLogLine =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
+            string expectedLogLine = $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
             
             logger.Error(operation, status, logInfos: null);
 
@@ -497,8 +496,7 @@ namespace NuciLog.Core.UnitTests
             Operation operation = Operation.StartUp;
             string message = "testudo";
 
-            string expectedLogLine =
-                $"Operation={operation.Name},Message={message}";
+            string expectedLogLine = $"Operation={operation.Name},Message={message}";
             
             logger.Error(operation, null, message, logInfos: null);
 
@@ -529,8 +527,7 @@ namespace NuciLog.Core.UnitTests
             Operation operation = Operation.StartUp;
             string message = "testudo";
 
-            string expectedLogLine =
-                $"Operation={operation.Name},Message={message}";
+            string expectedLogLine = $"Operation={operation.Name},Message={message}";
             
             logger.Error(operation, null, message, logInfos: null);
 
@@ -561,8 +558,7 @@ namespace NuciLog.Core.UnitTests
             Operation operation = Operation.StartUp;
             string message = "testudo";
 
-            string expectedLogLine =
-                $"Operation={operation.Name},Message={message}";
+            string expectedLogLine = $"Operation={operation.Name},Message={message}";
             
             logger.Error(operation, null, message, logInfos: null, extraLogInfos: null);
 
@@ -809,8 +805,7 @@ namespace NuciLog.Core.UnitTests
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
 
-            string expectedLogLine =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
+            string expectedLogLine = $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
             
             logger.Error(operation, status, message, logInfos: null);
 
@@ -843,8 +838,7 @@ namespace NuciLog.Core.UnitTests
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
 
-            string expectedLogLine =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
+            string expectedLogLine = $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
             
             logger.Error(operation, status, message, logInfos: null);
 
@@ -877,8 +871,7 @@ namespace NuciLog.Core.UnitTests
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
 
-            string expectedLogLine =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
+            string expectedLogLine = $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
             
             logger.Error(operation, status, message, logInfos: null, extraLogInfos: null);
 
