@@ -86,8 +86,7 @@ namespace NuciLog.Core.UnitTests
                 new LogInfo(TestLogInfoKey.TestKey, null)
             };
 
-            string expected =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
+            string expected = $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
             string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
 
             Assert.AreEqual(expected, actual);
@@ -104,8 +103,7 @@ namespace NuciLog.Core.UnitTests
                 new LogInfo(TestLogInfoKey.TestKey, string.Empty)
             };
 
-            string expected =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
+            string expected = $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
             string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
 
             Assert.AreEqual(expected, actual);
@@ -122,8 +120,7 @@ namespace NuciLog.Core.UnitTests
                 new LogInfo(TestLogInfoKey.TestKey, "            ")
             };
 
-            string expected =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
+            string expected = $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()}";
             string actual = LogMessageBuilder.Build(operation, status, null, null, logInfos);
 
             Assert.AreEqual(expected, actual);
@@ -324,8 +321,7 @@ namespace NuciLog.Core.UnitTests
             OperationStatus status = OperationStatus.Started;
             string message = "testudo";
 
-            string expected =
-                $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
+            string expected = $"Operation={operation.Name},OperationStatus={status.Name.ToUpper()},Message={message}";
             string actual = LogMessageBuilder.Build(operation, status, message, exception: null, logInfos: null);
 
             Assert.AreEqual(expected, actual);
