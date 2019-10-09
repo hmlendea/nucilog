@@ -51,9 +51,21 @@ namespace NuciLog.Core
         public void Verbose(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
             => Verbose(operation, operationStatus, message: null, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Verbose(string message)
-            => Verbose(operation: null, operationStatus: null, message: message);
+            => Verbose(operation: null, operationStatus: null, message: message, logInfos: null);
+        public void Verbose(string message, params LogInfo[] logInfos)
+            => Verbose(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Verbose(string message, IEnumerable<LogInfo> logInfos)
+            => Verbose(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Verbose(string message, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Verbose(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Verbose(string message, Exception exception)
             => Verbose(operation: null, operationStatus: null, message: message, exception: exception, logInfos: null);
+        public void Verbose(string message, Exception exception, params LogInfo[] logInfos)
+            => Verbose(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos as IEnumerable<LogInfo>);
+        public void Verbose(string message, Exception exception, IEnumerable<LogInfo> logInfos)
+            => Verbose(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos);
+        public void Verbose(string message, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Verbose(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Verbose(Operation operation, string message)
             => Verbose(operation, operationStatus: null, message: message, logInfos: null);
         public void Verbose(Operation operation, string message, params LogInfo[] logInfos)
@@ -135,9 +147,21 @@ namespace NuciLog.Core
         public void Debug(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
             => Debug(operation, operationStatus, message: null, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Debug(string message)
-            => Debug(operation: null, operationStatus: null, message: message);
+            => Debug(operation: null, operationStatus: null, message: message, logInfos: null);
+        public void Debug(string message, params LogInfo[] logInfos)
+            => Debug(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Debug(string message, IEnumerable<LogInfo> logInfos)
+            => Debug(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Debug(string message, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Debug(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Debug(string message, Exception exception)
             => Debug(operation: null, operationStatus: null, message: message, exception: exception, logInfos: null);
+        public void Debug(string message, Exception exception, params LogInfo[] logInfos)
+            => Debug(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos as IEnumerable<LogInfo>);
+        public void Debug(string message, Exception exception, IEnumerable<LogInfo> logInfos)
+            => Debug(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos);
+        public void Debug(string message, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Debug(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Debug(Operation operation, string message)
             => Debug(operation, operationStatus: null, message: message, logInfos: null);
         public void Debug(Operation operation, string message, params LogInfo[] logInfos)
@@ -219,9 +243,21 @@ namespace NuciLog.Core
         public void Info(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
             => Info(operation, operationStatus, message: null, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Info(string message)
-            => Info(operation: null, operationStatus: null, message: message);
+            => Info(operation: null, operationStatus: null, message: message, logInfos: null);
+        public void Info(string message, params LogInfo[] logInfos)
+            => Info(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Info(string message, IEnumerable<LogInfo> logInfos)
+            => Info(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Info(string message, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Info(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Info(string message, Exception exception)
             => Info(operation: null, operationStatus: null, message: message, exception: exception, logInfos: null);
+        public void Info(string message, Exception exception, params LogInfo[] logInfos)
+            => Info(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos as IEnumerable<LogInfo>);
+        public void Info(string message, Exception exception, IEnumerable<LogInfo> logInfos)
+            => Info(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos);
+        public void Info(string message, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Info(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Info(Operation operation, string message)
             => Info(operation, operationStatus: null, message: message, logInfos: null);
         public void Info(Operation operation, string message, params LogInfo[] logInfos)
@@ -303,9 +339,21 @@ namespace NuciLog.Core
         public void Warn(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
             => Warn(operation, operationStatus, message: null, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Warn(string message)
-            => Warn(operation: null, operationStatus: null, message: message);
+            => Warn(operation: null, operationStatus: null, message: message, logInfos: null);
+        public void Warn(string message, params LogInfo[] logInfos)
+            => Warn(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Warn(string message, IEnumerable<LogInfo> logInfos)
+            => Warn(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Warn(string message, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Warn(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Warn(string message, Exception exception)
             => Warn(operation: null, operationStatus: null, message: message, exception: exception, logInfos: null);
+        public void Warn(string message, Exception exception, params LogInfo[] logInfos)
+            => Warn(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos as IEnumerable<LogInfo>);
+        public void Warn(string message, Exception exception, IEnumerable<LogInfo> logInfos)
+            => Warn(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos);
+        public void Warn(string message, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Warn(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Warn(Operation operation, string message)
             => Warn(operation, operationStatus: null, message: message, logInfos: null);
         public void Warn(Operation operation, string message, params LogInfo[] logInfos)
@@ -387,9 +435,21 @@ namespace NuciLog.Core
         public void Error(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
             => Error(operation, operationStatus, message: null, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Error(string message)
-            => Error(operation: null, operationStatus: null, message: message);
+            => Error(operation: null, operationStatus: null, message: message, logInfos: null);
+        public void Error(string message, params LogInfo[] logInfos)
+            => Error(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Error(string message, IEnumerable<LogInfo> logInfos)
+            => Error(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Error(string message, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Error(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Error(string message, Exception exception)
             => Error(operation: null, operationStatus: null, message: message, exception: exception, logInfos: null);
+        public void Error(string message, Exception exception, params LogInfo[] logInfos)
+            => Error(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos as IEnumerable<LogInfo>);
+        public void Error(string message, Exception exception, IEnumerable<LogInfo> logInfos)
+            => Error(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos);
+        public void Error(string message, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Error(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Error(Operation operation, string message)
             => Error(operation, operationStatus: null, message: message, logInfos: null);
         public void Error(Operation operation, string message, params LogInfo[] logInfos)
@@ -471,9 +531,21 @@ namespace NuciLog.Core
         public void Fatal(Operation operation, OperationStatus operationStatus, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
             => Fatal(operation, operationStatus, message: null, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Fatal(string message)
-            => Fatal(operation: null, operationStatus: null, message: message);
+            => Fatal(operation: null, operationStatus: null, message: message, logInfos: null);
+        public void Fatal(string message, params LogInfo[] logInfos)
+            => Fatal(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Fatal(string message, IEnumerable<LogInfo> logInfos)
+            => Fatal(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos);
+        public void Fatal(string message, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Fatal(operation: null, operationStatus: null, message: message, exception: null, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Fatal(string message, Exception exception)
             => Fatal(operation: null, operationStatus: null, message: message, exception: exception, logInfos: null);
+        public void Fatal(string message, Exception exception, params LogInfo[] logInfos)
+            => Fatal(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos as IEnumerable<LogInfo>);
+        public void Fatal(string message, Exception exception, IEnumerable<LogInfo> logInfos)
+            => Fatal(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos);
+        public void Fatal(string message, Exception exception, IEnumerable<LogInfo> logInfos, params LogInfo[] extraLogInfos)
+            => Fatal(operation: null, operationStatus: null, message: message, exception: exception, logInfos: logInfos, extraLogInfos: extraLogInfos);
         public void Fatal(Operation operation, string message)
             => Fatal(operation, operationStatus: null, message: message, logInfos: null);
         public void Fatal(Operation operation, string message, params LogInfo[] logInfos)

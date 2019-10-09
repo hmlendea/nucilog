@@ -431,13 +431,13 @@ namespace NuciLog.Core.UnitTests
         }
 
         [Test]
-        public void Debug_MessageIsPopulated_LogsCorrectly()
+        public void Debug_Message_LogsCorrectly()
         {
-            string message = "țestoasă";
+            string message = "testudo";
 
             string expectedLogLine = $"Message={message}";
             
-            logger.Debug(message);
+            logger.Debug(operation: null, message: message);
 
             Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
@@ -446,14 +446,259 @@ namespace NuciLog.Core.UnitTests
         [Test]
         public void Debug_MessageAndException_LogsCorrectly()
         {
-            string message = "țestoasă";
+            string message = "testudo";
+            Exception ex = new Exception();
+
+            string expectedLogLine = $"Message={message},Exception={ex.GetType()},ExceptionMessage={ex.Message}";
+            
+            logger.Debug(operation: null, message: message, exception: ex);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndNullExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+
+            string expectedLogLine = $"Message={message}";
+            
+            logger.Debug(operation: null, message: message, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine = $"Message={message},{logInfos.Key.Name}={logInfos.Value}";
+            
+            logger.Debug(operation: null, message: message, logInfos: logInfos);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndNullLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+
+            string expectedLogLine = $"Message={message}";
+            
+            logger.Debug(operation: null, message: message, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine = $"Message={message},{TestLogInfoKey.TestKey.Name}=teeest";
+            
+            logger.Debug(operation: null, message: message, logInfos: logInfos);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndNullLogInfosAndNullExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+
+            string expectedLogLine = $"Message={message}";
+            
+            logger.Debug(operation: null, message: message, logInfos: null, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndNullLogInfosAndExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine = $"Message={message},{TestLogInfoKey.TestKey2.Name}=teeest2";
+            
+            logger.Debug(operation: null, message: message, logInfos: null, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndLogInfosAndNullExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine = $"Message={message},{TestLogInfoKey.TestKey.Name}=teeest";
+            
+            logger.Debug(operation: null, message: message, logInfos: logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndLogInfosAndExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine = $"Message={message},{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2";
+            
+            logger.Debug(operation: null, message: message, logInfos: logInfos, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndExceptionAndNullExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            Exception ex = new Exception();
+
+            string expectedLogLine = $"Message={message},Exception={ex.GetType()},ExceptionMessage={ex.Message}";
+            
+            logger.Debug(operation: null, message: message, exception: ex, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndExceptionAndExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            Exception ex = new Exception();
+            LogInfo logInfos = new LogInfo(TestLogInfoKey.TestKey, "teeest");
+
+            string expectedLogLine =
+                $"Message={message}," +
+                $"{logInfos.Key.Name}={logInfos.Value}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
+            
+            logger.Debug(operation: null, message: message, exception: ex, logInfos: logInfos);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndExceptionAndNullLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
             Exception ex = new Exception();
 
             string expectedLogLine =
                 $"Message={message}," +
                 $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
             
-            logger.Debug(message, ex);
+            logger.Debug(operation: null, message: message, exception: ex, logInfos: null);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndExceptionAndLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
+            
+            logger.Debug(operation: null, message: message, exception: ex, logInfos: logInfos);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndExceptionAndNullLogInfosAndNullExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            Exception ex = new Exception();
+
+            string expectedLogLine =
+                $"Message={message}," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
+            
+            logger.Debug(operation: null, message: message, exception: ex, logInfos: null, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndExceptionAndNullLogInfosAndExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            Exception ex = new Exception();
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Message={message}," +
+                $"{TestLogInfoKey.TestKey2.Name}=teeest2," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
+            
+            logger.Debug(operation: null, message: message, exception: ex, logInfos: null, extraLogInfos: extraLogInfos);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndExceptionAndLogInfosAndNullExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+
+            string expectedLogLine =
+                $"Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
+            
+            logger.Debug(operation: null, message: message, exception: ex, logInfos: logInfos, extraLogInfos: null);
+
+            Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
+            Assert.AreEqual(expectedLogLine, logger.LastLogLine);
+        }
+
+        [Test]
+        public void Debug_MessageAndExceptionAndLogInfosAndExtraLogInfos_LogsCorrectly()
+        {
+            string message = "testudo";
+            Exception ex = new Exception();
+            IEnumerable<LogInfo> logInfos = new List<LogInfo> { new LogInfo(TestLogInfoKey.TestKey, "teeest") };
+            LogInfo extraLogInfos = new LogInfo(TestLogInfoKey.TestKey2, "teeest2");
+
+            string expectedLogLine =
+                $"Message={message}," +
+                $"{TestLogInfoKey.TestKey.Name}=teeest,{TestLogInfoKey.TestKey2.Name}=teeest2," +
+                $"Exception={ex.GetType()},ExceptionMessage={ex.Message}";
+            
+            logger.Debug(operation: null, message: message, exception: ex, logInfos: logInfos, extraLogInfos: extraLogInfos);
 
             Assert.AreEqual(LogLevel.Debug, logger.LastLogLevel);
             Assert.AreEqual(expectedLogLine, logger.LastLogLine);
