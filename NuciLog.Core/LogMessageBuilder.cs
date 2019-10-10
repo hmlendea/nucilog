@@ -37,9 +37,9 @@ namespace NuciLog.Core
 
             if (!(processedDetails is null))
             {
-                foreach (LogInfo detail in processedDetails)
+                foreach (LogInfo logInfo in processedDetails)
                 {
-                    logMessage += $"{detail.Key.Name}={detail.Value},";
+                    logMessage += logInfo.ToString() + ",";
                 }
             }
 

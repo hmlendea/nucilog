@@ -25,5 +25,30 @@ namespace NuciLog.Core
             Key = key;
             Value = value.ToString(format);
         }
+
+        public override string ToString()
+        {
+            string str = $"{Key.Name}=";
+
+            if (Value is null)
+            {
+                return str;
+            }
+
+            if (Key.ValueFormat == LogInfoValueFormat.UpperCase)
+            {
+                str += Value.ToUpper();
+            }
+            else if (Key.ValueFormat == LogInfoValueFormat.LowerCase)
+            {
+                str += Value.ToLower();
+            }
+            else
+            {
+                str += Value;
+            }
+
+            return str;
+        }
     }
 }

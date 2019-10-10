@@ -6,9 +6,17 @@ namespace NuciLog.Core
     {
         public string Name { get; protected set; }
 
+        public LogInfoValueFormat ValueFormat { get; protected set; }
+
         protected LogInfoKey(string name)
         {
             Name = name;
+        }
+
+        protected LogInfoKey(string name, LogInfoValueFormat valueFormat)
+            : this(name)
+        {
+            ValueFormat = valueFormat;
         }
 
         public bool Equals(LogInfoKey other)
