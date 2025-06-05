@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <RootNamespace>NuciLog</RootNamespace>
     <Version>1.1.0.1</Version>
     <Description>NuciLog basic logger</Description>
@@ -17,12 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <PackageReference Include="NuciLog.Core" Version="2.3.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
+    <PackageReference Include="NuciLog.Core" Version="2.4.0" />
   </ItemGroup>
 
 </Project>
