@@ -6,15 +6,8 @@ using NuciLog.Core;
 
 namespace NuciLog
 {
-    public sealed class NuciLogger : Logger
+    public sealed class NuciLogger(NuciLoggerSettings settings) : Logger
     {
-        readonly NuciLoggerSettings settings;
-
-        public NuciLogger(NuciLoggerSettings settings)
-        {
-            this.settings = settings;
-        }
-
         protected override void WriteLog(LogLevel level, Func<string> logMessage)
         {
             if (level > settings.MinimumLevel)
