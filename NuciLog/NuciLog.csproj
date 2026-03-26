@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>NuciLog</RootNamespace>
     <Version>1.2.0</Version>
-    <Description>NuciLog basic logger</Description>
+    <Description>Lightweight structured logging library.</Description>
     <Authors>Horațiu Mlendea</Authors>
     <Copyright>Copyright 2026 © Horațiu Mlendea</Copyright>
     <RepositoryUrl>https://github.com/hmlendea/nucilog</RepositoryUrl>
