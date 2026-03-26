@@ -2,7 +2,7 @@ using NuciLog.Core;
 
 namespace NuciLog.Configuration
 {
-    internal sealed class NuciLoggerSettings
+    public sealed class NuciLoggerSettings
     {
         public string TimestampFormat { get; set; }
 
