@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-
+using NuciCLI;
 using NuciLog.Configuration;
 using NuciLog.Core;
 
@@ -19,7 +19,7 @@ namespace NuciLog
             string logLevel = level.ToString().ToUpper();
             string formattedLog = string.Format(settings.LogLineFormat, timestamp, SourceContext, logLevel, logMessage());
 
-            Console.WriteLine(formattedLog);
+            NuciConsole.WriteLine(formattedLog);
 
             if (settings.IsFileOutputEnabled &&
                 !string.IsNullOrWhiteSpace(settings.LogFilePath))
