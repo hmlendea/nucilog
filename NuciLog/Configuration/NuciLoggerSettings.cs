@@ -17,7 +17,7 @@ namespace NuciLog.Configuration
         public NuciLoggerSettings()
         {
             TimestampFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK";
-            LogLineFormat = "{0}|{1}|{2}|{3}";
+            LogLineFormat = "{0}｜{1}｜{2}｜{3}";
             LogFilePath = "logfile.log";
             MinimumLevel = LogLevel.Info;
             IsFileOutputEnabled = true;
