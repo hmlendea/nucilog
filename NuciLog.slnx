@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Solution Version="1.0">
+  <Projects>
+    <Project Path="NuciLog/NuciLog.csproj" />
+    <Project Path="NuciLog.UnitTests/NuciLog.UnitTests.csproj" />
+  </Projects>
+</Solution>
