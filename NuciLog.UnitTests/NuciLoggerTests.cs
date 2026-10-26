@@ -23,6 +23,18 @@ public sealed class NuciLoggerTests : IDisposable
         Console.SetOut(new StringWriter(_consoleOutput));
     }
 
+    [SetUp]
+    public void SetUp()
+    {
+        _consoleOutput.Clear();
+        Console.SetOut(new StringWriter(_consoleOutput));
+
+        if (File.Exists(_testLogFile))
+        {
+            File.Delete(_testLogFile);
+        }
+    }
+
     public void Dispose()
     {
         Console.SetOut(_originalConsoleOut);
@@ -52,7 +64,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Verbose(() => "Verbose message");
+        logger.Verbose("Verbose message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Verbose message"));
@@ -72,7 +84,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Debug(() => "Debug message");
+        logger.Debug("Debug message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Debug message"));
@@ -89,7 +101,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Info(() => "Info message");
+        logger.Info("Info message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Info message"));
@@ -106,7 +118,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Warn(() => "Warning message");
+        logger.Warn("Warning message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Warning message"));
@@ -123,7 +135,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Error(() => "Error message");
+        logger.Error("Error message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Error message"));
@@ -140,7 +152,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Fatal(() => "Fatal message");
+        logger.Fatal("Fatal message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Fatal message"));
@@ -157,7 +169,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Verbose(() => "Verbose message");
+        logger.Verbose("Verbose message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Not.Contain("Verbose message"));
@@ -174,7 +186,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Debug(() => "Debug message");
+        logger.Debug("Debug message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Not.Contain("Debug message"));
@@ -190,7 +202,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Info(() => "Info message");
+        logger.Info("Info message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Not.Contain("Info message"));
@@ -206,7 +218,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Warn(() => "Warning message");
+        logger.Warn("Warning message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Not.Contain("Warning message"));
@@ -222,7 +234,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Error(() => "Error message");
+        logger.Error("Error message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Not.Contain("Error message"));
@@ -233,8 +245,8 @@ public sealed class NuciLoggerTests : IDisposable
     {
         var logger = CreateLogger();
 
-        logger.SetSourceContext();
-        logger.Info(() => "Test message");
+        logger.SetSourceContext<NuciLoggerTests>();
+        logger.Info("Test message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Test message"));
@@ -245,9 +257,9 @@ public sealed class NuciLoggerTests : IDisposable
     {
         var logger = CreateLogger();
 
-        logger.SetSourceContext();
-        logger.Info(() => "First message");
-        logger.Info(() => "Second message");
+        logger.SetSourceContext<NuciLoggerTests>();
+        logger.Info("First message");
+        logger.Info("Second message");
 
         var output = _consoleOutput.ToString();
         var lines = output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
@@ -260,9 +272,9 @@ public sealed class NuciLoggerTests : IDisposable
         var logger = CreateLogger();
 
         logger.SetSourceContext(typeof(NuciLoggerTests));
-        logger.Info(() => "First message");
+        logger.Info("First message");
         logger.SetSourceContext(typeof(NuciLogger));
-        logger.Info(() => "Second message");
+        logger.Info("Second message");
 
         var output = _consoleOutput.ToString();
         var lines = output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
@@ -279,7 +291,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "File message");
+        logger.Info("File message");
 
         Assert.That(File.Exists(_testLogFile), Is.True);
         var content = File.ReadAllText(_testLogFile);
@@ -296,7 +308,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "File message");
+        logger.Info("File message");
 
         Assert.That(File.Exists(_testLogFile), Is.False);
     }
@@ -311,7 +323,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "File message");
+        logger.Info("File message");
 
         Assert.That(File.Exists(_testLogFile), Is.False);
     }
@@ -326,7 +338,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "File message");
+        logger.Info("File message");
 
         Assert.That(File.Exists(_testLogFile), Is.False);
     }
@@ -341,7 +353,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "File message");
+        logger.Info("File message");
 
         Assert.That(File.Exists(_testLogFile), Is.False);
     }
@@ -355,7 +367,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "Timestamp test");
+        logger.Info("Timestamp test");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Match(@"\d{2}:\d{2}:\d{2}"));
@@ -370,12 +382,12 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.WithSourceContext("TestContext");
-        logger.Log(LogLevel.Info, () => "Format test");
+        logger.SetSourceContext(typeof(NuciLoggerTests));
+        logger.Info("Format test");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.StartWith("["));
-        Assert.That(output, Does.Contain("TestContext"));
+        Assert.That(output, Does.Contain(nameof(NuciLoggerTests)));
         Assert.That(output, Does.Contain("INFO"));
         Assert.That(output, Does.Contain("Format test"));
     }
@@ -389,19 +401,18 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.WithSourceContext("Context");
-        logger.Log(LogLevel.Warn, () => "Reversed message");
+        logger.SetSourceContext(typeof(NuciLoggerTests));
+        logger.Warn("Reversed message");
 
         var output = _consoleOutput.ToString();
-        Assert.That(output.Trim(), Does.StartWith("Reversed message"));
+        Assert.That(output.Trim(), Does.StartWith("Message＝Reversed message"));
         Assert.That(output, Does.Contain("WARN"));
-        Assert.That(output, Does.Contain("Context"));
+        Assert.That(output, Does.Contain(nameof(NuciLoggerTests)));
     }
 
     [Test]
-    public void Log_LazyMessageEvaluation_NotEvaluatedWhenFiltered()
+    public void Log_MessageIsFilteredBelowMinimumLevel()
     {
-        var messageEvaluated = false;
         var logger = CreateLogger(new NuciLoggerSettings
         {
             MinimumLevel = LogLevel.Warn,
@@ -409,19 +420,14 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Log(LogLevel.Info, () =>
-        {
-            messageEvaluated = true;
-            return "Should not be evaluated";
-        });
+        logger.Info("Should not be written");
 
-        Assert.That(messageEvaluated, Is.False);
+        Assert.That(_consoleOutput.ToString(), Does.Not.Contain("Should not be written"));
     }
 
     [Test]
-    public void Log_LazyMessageEvaluation_EvaluatedWhenNotFiltered()
+    public void Log_MessageIsWrittenAtMinimumLevel()
     {
-        var messageEvaluated = false;
         var logger = CreateLogger(new NuciLoggerSettings
         {
             MinimumLevel = LogLevel.Info,
@@ -429,24 +435,20 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Log(LogLevel.Info, () =>
-        {
-            messageEvaluated = true;
-            return "Should be evaluated";
-        });
+        logger.Info("Should be written");
 
-        Assert.That(messageEvaluated, Is.True);
+        Assert.That(_consoleOutput.ToString(), Does.Contain("Should be written"));
     }
 
     [Test]
-    public void Log_ExceptionInMessageFunc_PropagatesException()
+    public void Log_ExceptionDetailsAreWritten()
     {
         var logger = CreateLogger();
+        InvalidOperationException exception = new("Test exception");
 
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            logger.Log(LogLevel.Info, () => throw new InvalidOperationException("Test exception"));
-        });
+        logger.Info("Operation failed", exception);
+
+        Assert.That(_consoleOutput.ToString(), Does.Contain("Test exception"));
     }
 
     [Test]
@@ -456,7 +458,7 @@ public sealed class NuciLoggerTests : IDisposable
 
         for (int i = 0; i < 10; i++)
         {
-            logger.Log(LogLevel.Info, () => $"Message {i}");
+            logger.Info($"Message {i}");
         }
 
         var output = _consoleOutput.ToString();
@@ -475,7 +477,7 @@ public sealed class NuciLoggerTests : IDisposable
             int index = i;
             tasks[i] = System.Threading.Tasks.Task.Run(() =>
             {
-                logger.Log(LogLevel.Info, () => $"Concurrent {index}");
+                logger.Info($"Concurrent {index}");
             });
         }
 
@@ -498,7 +500,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "New message");
+        logger.Info("New message");
 
         var content = File.ReadAllText(_testLogFile);
         Assert.That(content, Does.Contain("Existing content"));
@@ -510,7 +512,7 @@ public sealed class NuciLoggerTests : IDisposable
     {
         var logger = CreateLogger();
 
-        logger.Log(LogLevel.Info, () => "Unicode: 日本語 🎉 café");
+        logger.Info("Unicode: 日本語 🎉 café");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("日本語"));
@@ -519,11 +521,11 @@ public sealed class NuciLoggerTests : IDisposable
     }
 
     [Test]
-    public void Log_NewlinesInMessage_HandledInSingleLine()
+    public void Log_NewlinesInMessage_ArePreserved()
     {
         var logger = CreateLogger();
 
-        logger.Log(LogLevel.Info, () => "Line 1\nLine 2\nLine 3");
+        logger.Info("Line 1\nLine 2\nLine 3");
 
         var output = _consoleOutput.ToString();
         var lines = output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
@@ -538,7 +540,7 @@ public sealed class NuciLoggerTests : IDisposable
     {
         var logger = CreateLogger();
 
-        logger.Log(LogLevel.Info, () => "Col1\tCol2\tCol3");
+        logger.Info("Col1\tCol2\tCol3");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("\t"));
@@ -549,21 +551,20 @@ public sealed class NuciLoggerTests : IDisposable
     {
         var logger = CreateLogger();
 
-        logger.Log(LogLevel.Info, () => "");
+        logger.Info("");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("INFO"));
     }
 
     [Test]
-    public void Log_NullMessage_ThrowsArgumentNullException()
+    public void Log_NullMessage_IsHandled()
     {
         var logger = CreateLogger();
 
-        Assert.Throws<ArgumentNullException>(() =>
-        {
-            logger.Log(LogLevel.Info, null!);
-        });
+        logger.Info((string)null!);
+
+        Assert.That(_consoleOutput.ToString(), Does.Contain("INFO"));
     }
 
 [Test]
@@ -571,7 +572,7 @@ public sealed class NuciLoggerTests : IDisposable
     {
         var logger = new NuciLogger(new NuciLoggerSettings());
 
-        logger.Log(LogLevel.Info, () => "Default settings test");
+        logger.Info("Default settings test");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Default settings test"));
@@ -593,11 +594,10 @@ public sealed class NuciLoggerTests : IDisposable
             {
                 LogFilePath = readOnlyFile,
                 IsFileOutputEnabled = true,
-                MinimumLevel = LogLevel.Trace
+                MinimumLevel = LogLevel.Verbose
             });
 
-            var exception = Record.Exception(() => logger.Log(LogLevel.Info, () => "Test"));
-            Assert.Null(exception);
+            Assert.That(() => logger.Info("Test"), Throws.TypeOf<UnauthorizedAccessException>());
         }
         finally
         {
@@ -621,7 +621,7 @@ public sealed class NuciLoggerTests : IDisposable
 
         Assert.Throws<DirectoryNotFoundException>(() =>
         {
-            logger.Log(LogLevel.Info, () => "Test");
+            logger.Info("Test");
         });
     }
 
@@ -635,7 +635,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Log(LogLevel.Info, () => "Info message");
+        logger.Info("Info message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Info message"));
@@ -651,7 +651,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Log(LogLevel.Warn, () => "Warning message");
+        logger.Warn("Warning message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Warning message"));
@@ -667,7 +667,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Log(LogLevel.Warn, () => "Warning message");
+        logger.Warn("Warning message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Warning message"));
@@ -683,7 +683,7 @@ public sealed class NuciLoggerTests : IDisposable
             IsFileOutputEnabled = true
         });
 
-        logger.Log(LogLevel.Info, () => "Info message");
+        logger.Info("Info message");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Not.Contain("Info message"));
@@ -698,7 +698,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "Console only");
+        logger.Info("Console only");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("Console only"));
@@ -714,7 +714,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "File and console");
+        logger.Info("File and console");
 
         Assert.That(File.Exists(_testLogFile), Is.True);
         var output = _consoleOutput.ToString();
@@ -731,7 +731,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "Console only");
+        logger.Info("Console only");
 
         Assert.That(File.Exists(_testLogFile), Is.False);
     }
@@ -746,7 +746,7 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "Console only");
+        logger.Info("Console only");
 
         Assert.That(File.Exists(_testLogFile), Is.False);
     }
@@ -756,12 +756,12 @@ public sealed class NuciLoggerTests : IDisposable
     {
         var logger = CreateLogger();
 
-        logger.Log(LogLevel.Verbose, () => "Verbose");
-        logger.Log(LogLevel.Debug, () => "Debug");
-        logger.Log(LogLevel.Info, () => "Info");
-        logger.Log(LogLevel.Warn, () => "Warn");
-        logger.Log(LogLevel.Error, () => "Error");
-        logger.Log(LogLevel.Fatal, () => "Fatal");
+        logger.Verbose("Verbose");
+        logger.Debug("Debug");
+        logger.Info("Info");
+        logger.Warn("Warn");
+        logger.Error("Error");
+        logger.Fatal("Fatal");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("VERBOSE"));
@@ -782,8 +782,8 @@ public sealed class NuciLoggerTests : IDisposable
             MinimumLevel = LogLevel.Verbose
         });
 
-        logger.Log(LogLevel.Info, () => "Line 1");
-        logger.Log(LogLevel.Info, () => "Line 2");
+        logger.Info("Line 1");
+        logger.Info("Line 2");
 
         var content = File.ReadAllText(_testLogFile);
         Assert.That(content, Does.Contain(Environment.NewLine));
@@ -796,9 +796,10 @@ public sealed class NuciLoggerTests : IDisposable
     {
         var logger = CreateLogger();
 
-        var result = logger.WithSourceContext("Test");
+        logger.SetSourceContext(typeof(NuciLoggerTests));
+        logger.Info("Test");
 
-        Assert.That(result, Is.SameAs(logger));
+        Assert.That(_consoleOutput.ToString(), Does.Contain(nameof(NuciLoggerTests)));
     }
 
     [Test]
@@ -806,7 +807,7 @@ public sealed class NuciLoggerTests : IDisposable
     {
         var logger = CreateLogger();
 
-        logger.Log(LogLevel.Info, () => "Test");
+        logger.Info("Test");
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain("||").Or.Contain("｜｜"));
@@ -817,11 +818,11 @@ public sealed class NuciLoggerTests : IDisposable
     {
         var logger = CreateLogger();
 
-        logger.WithSourceContext("Class.Name<Generic>");
-        logger.Log(LogLevel.Info, () => "Test");
+        logger.SetSourceContext(typeof(NuciLoggerTests));
+        logger.Info("Test");
 
         var output = _consoleOutput.ToString();
-        Assert.That(output, Does.Contain("Class.Name<Generic>"));
+        Assert.That(output, Does.Contain(nameof(NuciLoggerTests)));
     }
 
     [Test]
@@ -830,7 +831,7 @@ public sealed class NuciLoggerTests : IDisposable
         var logger = CreateLogger();
         var longMessage = new string('x', 10000);
 
-        logger.Log(LogLevel.Info, () => longMessage);
+        logger.Info(longMessage);
 
         var output = _consoleOutput.ToString();
         Assert.That(output, Does.Contain(longMessage));
@@ -844,7 +845,7 @@ public sealed class NuciLoggerTests : IDisposable
 
         for (int i = 0; i < 1000; i++)
         {
-            logger.Log(LogLevel.Info, () => $"Message {i}");
+            logger.Info($"Message {i}");
         }
 
         stopwatch.Stop();

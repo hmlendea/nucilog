@@ -1,24 +1,15 @@
 using System;
-using System.Reflection;
 using NuciLog.Core;
+using NUnit.Framework;
 
-public class CheckLogLevel
+namespace NuciLog.UnitTests;
+
+[TestFixture]
+public sealed class CheckLogLevel
 {
-    public static void Main()
-    {
-        var logLevelType = typeof(LogLevel);
-        Console.WriteLine($"LogLevel type: {logLevelType.FullName}");
-        Console.WriteLine($"IsEnum: {logLevelType.IsEnum}");
-
-        foreach (var field in logLevelType.GetFields(BindingFlags.Public | BindingFlags.Static))
-        {
-            Console.WriteLine($"  {field.Name} = {field.GetValue(null)}");
-        }
-
-        Console.WriteLine("\nAll enum values:");
-        foreach (var value in Enum.GetValues(logLevelType))
-        {
-            Console.WriteLine($"  {value} = {(int)value}");
-        }
-    }
+    [Test]
+    public void LogLevel_ContainsSupportedValues()
+        => Assert.That(
+            Enum.GetNames<LogLevel>(),
+            Is.EquivalentTo(new[] { "Verbose", "Debug", "Info", "Warn", "Error", "Fatal" }));
 }
