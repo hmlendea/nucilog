@@ -8,13 +8,15 @@ NuciLog is a lightweight structured logging library for .NET applications. It pr
 
 ```
 NuciLog/
-├── NuciLog.sln                    # Solution file
+├── NuciLog.slnx                   # Solution file
 ├── NuciLog/                       # Main project
 │   ├── NuciLog.csproj             # Project file (net10.0)
 │   ├── NuciLogger.cs              # Core logger implementation
 │   ├── ServiceCollectionExtensions.cs  # DI registration
 │   └── Configuration/
 │       └── NuciLoggerSettings.cs  # Configuration model
+├── NuciLog.UnitTests/             # Behavioural unit tests
+├── NuciLog.ArchitectureTests/     # Architecture and convention fitness tests
 ├── .github/workflows/dotnet.yml   # CI/CD pipeline
 ├── README.md                      # User documentation
 ├── LICENSE                        # GPL-3.0-or-later
@@ -167,7 +169,7 @@ logger.WithSourceContext("MyComponent").Log(LogLevel.Info, () => "Message");
 **Jobs**:
 - Build: Restore → Build → Test on ubuntu-latest with .NET 10.0.x
 
-**No test project exists** - `dotnet test` succeeds with no tests found
+**Tests**: `NuciLog.UnitTests` covers the logger and settings behaviour; `NuciLog.ArchitectureTests` enforces the dependency, source, project, and solution conventions.
 
 ## Versioning & Packaging
 
@@ -193,6 +195,6 @@ logger.WithSourceContext("MyComponent").Log(LogLevel.Info, () => "Message");
 2. **No async I/O** - File writes are synchronous blocking
 3. **No structured logging** - Output is formatted string, not structured data
 4. **No log filtering by source** - Only global minimum level
-5. **No test coverage** - No test project in solution
+5. **Test coverage limited to unit and architecture tests** - No integration, performance, or consumer end-to-end tests
 6. **Thread safety not guaranteed** - Concurrent writes may interleave
 7. **DateTime.Now** - Uses local time, not UTC; no ILogger abstraction

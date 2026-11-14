@@ -2,47 +2,83 @@
 
 ## Current Test Status
 
-**No test project exists** in the solution.
+The solution contains two test projects:
+
+| Project | Purpose |
+|---------|---------|
+| `NuciLog.UnitTests` | Behavioural unit tests for `NuciLogger`, `NuciLoggerSettings`, and the supported log levels |
+| `NuciLog.ArchitectureTests` | Dependency, source-convention, project, and solution fitness rules |
 
 ```
-dotnet test --no-build --verbosity normal
-→ Build succeeded in 0.9s (no tests found)
+dotnet test --verbosity normal
+→ 277 tests pass (68 unit, 209 architecture)
 ```
 
-## Test Project Structure (Recommended)
+## Test Project Structure
 
 ```
-NuciLog.Tests/
-├── NuciLog.Tests.csproj
-├── Unit/
-│   ├── NuciLoggerSettingsTests.cs
-│   ├── NuciLoggerTests.cs
-│   └── ServiceCollectionExtensionsTests.cs
-├── Integration/
-│   ├── ConfigurationBindingTests.cs
-│   └── DIContainerTests.cs
-└── TestUtilities/
-    ├── TestLoggerFactory.cs
-    └── ConsoleCapture.cs
+NuciLog.UnitTests/
+├── NuciLog.UnitTests.csproj
+├── NuciLoggerTests.cs                  # Logger behaviour (level filter, output, errors)
+├── NuciLoggerSettingsTests.cs          # Settings defaults, mutation, configuration binding
+└── CheckLogLevel.cs                    # Supported log level enumeration
+
+NuciLog.ArchitectureTests/
+├── NuciLog.ArchitectureTests.csproj
+├── ProductionArchitecture.cs                # Shared ArchUnit.NET model and selectors
+├── ArchitectureResources.cs                 # Embedded production, test, and project sources
+├── DependencyBoundaryTests.cs               # Assembly references, boundaries, statelessness
+├── LayerDependencyTests.cs                  # Namespace boundaries, cycles, infrastructure bans
+├── CompiledConventionTests.cs               # Compiled sealing, settings, logger, JSON, regex
+├── SourceFileConventionTests.cs             # Type/filename, namespace, braces, arity, ref/optional
+├── CodingConventionTests.cs                 # Explicit types, no ternaries/tuples, usings, whitespace
+├── FormattingConventionTests.cs             # Blank lines, line endings, comments, indentation, BOM
+├── StatementConventionTests.cs              # Unreachable code, empty catch, bare rethrow, empty bodies
+├── ExpressionBodyConventionTests.cs         # Expression-bodied single-statement members
+├── MemberOrganisationTests.cs               # Accessibility, member and field ordering
+├── MemberOrderingDetailedTests.cs           # Per-group accessibility ordering
+├── NamingConventionTests.cs                 # Aliases, PascalCase, private fields, interfaces, booleans
+├── NamespaceAndUsingConventionTests.cs      # Using placement/groups, forbidden namespaces and types
+├── NullHandlingConventionTests.cs           # is null, no '!' or '??', static Equals, safe casts
+├── ConstantConventionTests.cs               # No const or magic literals, unique enum values
+├── LowLevelConventionTests.cs               # Compound increments, extension methods, unsafe, goto
+├── TypeDeclarationConventionTests.cs        # Accessibility, sealing, preview features, exceptions
+├── DocumentationConventionTests.cs          # XML documentation on public NuGet types and members
+├── DocumentationConsistencyTests.cs         # Summary text presence and non-empty summaries
+├── TestSourceConventionTests.cs             # Test fixture, naming, assertions, isolation, helpers
+├── ArchitectureTestSourceConventionTests.cs # Architecture-test self-conventions
+├── ProjectConventionTests.cs                # Project properties, package order, test flags, metadata
+├── SolutionConventionTests.cs               # SDK-style solution structure and project order
+└── RepositoryConventionTests.cs             # Workflow triggers, licence, documentation references
 ```
 
-## NuciLog.Tests.csproj (Recommended)
+## NuciLog.UnitTests.csproj
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-    <RootNamespace>NuciLog.Tests</RootNamespace>
+    <IsTestProject>true</IsTestProject>
+    <ExcludeFromCodeCoverage>true</ExcludeFromCodeCoverage>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-    <PackageReference Include="xunit" Version="2.9.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.9" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.9" />
-    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.13" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+    <PackageReference Include="Moq" Version="4.21.0" />
+    <PackageReference Include="NUnit" Version="5.0.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="6.3.1" />
+    <PackageReference Include="NuciLog.Core" Version="3.1.1" />
+    <PackageReference Include="coverlet.collector" Version="10.1.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -50,6 +86,36 @@ NuciLog.Tests/
   </ItemGroup>
 </Project>
 ```
+
+## NuciLog.ArchitectureTests.csproj
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <ExcludeFromCodeCoverage>true</ExcludeFromCodeCoverage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+    <PackageReference Include="NUnit" Version="5.0.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="6.3.1" />
+    <PackageReference Include="TngTech.ArchUnitNET.NUnit" Version="0.13.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../NuciLog/NuciLog.csproj" />
+  </ItemGroup>
+</Project>
+```
+
+The architecture project embeds the handwritten production sources and the project/solution files as resources, so the source-convention and project rules never depend on the host file-system layout.
 
 ---
 
@@ -337,7 +403,7 @@ public static class TestSettingsFactory
 
 ### Coverage Thresholds (Recommended)
 ```xml
-<!-- In NuciLog.Tests.csproj -->
+<!-- In NuciLog.UnitTests.csproj -->
 <PropertyGroup>
   <Threshold>80</Threshold>
   <ThresholdType>line</ThresholdType>

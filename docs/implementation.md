@@ -413,7 +413,7 @@ Consumer (e.g., WeatherService)
 
 ## Testing Gaps
 
-**No test project exists** in solution. Recommended test coverage:
+The unit test project `NuciLog.UnitTests` covers the following areas:
 
 1. **NuciLoggerSettings**
    - Default values

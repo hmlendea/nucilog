@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="NuciLog/NuciLog.csproj" />
+  <Project Path="NuciLog.ArchitectureTests/NuciLog.ArchitectureTests.csproj" />
   <Project Path="NuciLog.UnitTests/NuciLog.UnitTests.csproj" />
 </Solution>
