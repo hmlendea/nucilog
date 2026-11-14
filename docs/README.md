@@ -167,7 +167,7 @@ if (level > settings.MinimumLevel) return;
 | No async I/O | Blocks on file write | Custom logger override |
 | No structured logging | Plain text only | Custom formatter |
 | No source filtering | Global level only | Multiple loggers |
-| No test coverage | Regression risk | Add test project |
+| No integration tests | No consumer end-to-end coverage | Add consumer scenario tests |
 | Context bleeding | Wrong source in logs | Per-context loggers |
 | Local time only | No UTC option | Custom timestamp format |
 
@@ -197,7 +197,7 @@ dotnet build -c Release
 # Pack
 dotnet pack -c Release -o ./nupkg
 
-# Test (no tests yet)
+# Test
 dotnet test
 ```
 
@@ -216,7 +216,7 @@ dotnet test
 2. Setup .NET 10.0.x
 3. Restore
 4. Build
-5. Test (currently passes with no tests)
+5. Test
 
 ---
 

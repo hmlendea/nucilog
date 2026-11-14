@@ -245,7 +245,11 @@ As a library, NuciLog is executed by consuming applications. To test locally, cr
 
 ### Test
 
-The project currently does not contain unit tests. To add tests, create a test project and reference `NuciLog`.
+```bash
+dotnet test
+```
+
+The solution contains the `NuciLog.UnitTests` project for behavioural tests and the `NuciLog.ArchitectureTests` project for dependency, source-convention, project, and solution fitness rules.
 
 ### Code Generation
 
@@ -268,6 +272,9 @@ NuciLog/
 │   └── NuciLoggerSettings.cs       # Configuration model
 ├── bin/                    # Compiled output (Debug/Release)
 └── obj/                    # Build artifacts
+
+NuciLog.UnitTests/          # Behavioural unit tests
+NuciLog.ArchitectureTests/  # Architecture and convention fitness tests
 ```
 
 ## 🔗 Related Projects

@@ -229,8 +229,8 @@ When a project references NuciLog 1.2.1, it gets:
 - SourceLink tasks (Git, Common, GitHub)
 
 ### Test (dotnet test)
-- No test project exists
-- Would need: xUnit/MSTest/NUnit, test runner, coverlet
+- NUnit, NUnit3TestAdapter, Microsoft.NET.Test.Sdk
+- Microsoft.CodeAnalysis.CSharp, TngTech.ArchUnitNET.NUnit (architecture tests)
 
 ## Dependency Visualization (Mermaid)
 

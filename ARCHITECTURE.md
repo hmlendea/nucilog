@@ -299,33 +299,54 @@ flowchart TB
 
 ## ✅ Testing and Verification
 
-**Current state**: No test project exists in the solution. `dotnet test` passes with zero tests.
+The unit test project `NuciLog.UnitTests` verifies:
 
-**Architecture boundaries needing verification**:
+- `NuciLoggerSettings` defaults, property mutation, and configuration binding (JSON stream, case-insensitive keys, missing values)
+- `NuciLogger` level filtering at, above, and below the configured minimum
+- Console output formatting, custom timestamp and log-line formats, and source context
+- Conditional file output: enabled, disabled, empty, whitespace, and null paths
+- Append behaviour, unicode, newlines, empty and long messages, concurrency
+- Error propagation for `UnauthorizedAccessException` and `DirectoryNotFoundException`
 
-| Boundary | Current Coverage | Gap |
-|----------|------------------|-----|
-| `NuciLoggerSettings` defaults & binding | None | Unit tests for constructor defaults, configuration binding, enum parsing |
-| `NuciLogger.WriteLog` level filtering | None | Level filter logic (>, not >=), lazy message evaluation |
-| `NuciLogger.WriteLog` formatting | None | Placeholder substitution, custom formats, timestamp formats |
-| `NuciLogger.WriteLog` console output | None | `NuciConsole.WriteLine` invocation |
-| `NuciLogger.WriteLog` file output | None | Conditional write, append behavior, path validation |
-| `ServiceCollectionExtensions` registration | None | `IOptions<>`, concrete singleton, configuration binding |
-| Error paths | None | `FormatException`, `IOException`, `UnauthorizedAccessException` propagation |
-| Concurrency | None | `SourceContext` bleeding, file interleaving |
+The architecture test project `NuciLog.ArchitectureTests` verifies:
 
-**Execute principal automated verification**:
+- The production assembly references only the documented assemblies and no test or platform-specific assemblies
+- The public API surface is the expected three types, inside the documented namespaces
+- `NuciLogger` depends on `NuciLoggerSettings`; the settings model stays independent of the logger
+- The library declares no mutable instance or static state and exposes no friend assemblies
+- The namespace graph is acyclic and free of ASP.NET Core, Entity Framework, DynamoDB, Dapper, and MediatR dependencies
+- Compiled sealing, settings-POCO shape, logger override surface, public-field absence, JSON and regex allocation rules, and custom-exception accessibility
+- Every handwritten production source file declares exactly one type matching its file name and folder namespace
+- Production sources use block namespaces, braced control-flow bodies, four-space indentation, and no byte-order marks
+- Production sources use explicit types and accessibility and no ternaries, tuples, ref/out or optional parameters, records, partial types, `init` accessors, regions, nullable directives, `const`, `goto`, `unsafe`, pointer types, or nested types
+- Single-statement methods and computed properties are expression-bodied, and members follow the documented kind, field-kind, and accessibility ordering
+- Usings are placed outside the namespace, grouped and alphabetised, and no `Helpers`, `Utils`, `Common`, `Misc`, `Shared`, or `.Interfaces` namespaces or types exist
+- Null handling uses `is null` patterns and no null-forgiving or null-coalescing operators, and equality prefers static `Equals`
+- Comments begin with an uppercase letter, end with a period, and use the documented `// TODO:` format
+- Every public NuGet type and member carries non-empty XML documentation
+- Test sources use NUnit fixtures, the `Tests` naming suffix, at least two `[TestCase]` values, assertions, and portable paths, and no comment banners, reflection, or alternative frameworks
+- Architecture test sources declare one type per file, block namespaces, sealed NUnit fixtures, and an assertion per test
+- Project files declare the required properties, order package references alphabetically, set the test flags, and carry complete package metadata
+- The solution uses the SDK-style structure with the documented project order and sibling project folders
+- The CI workflow triggers on push and pull request and runs restore, build, and test; the licence stays GPL-3.0-or-later; and the documentation references both test projects
+
+Execute the principal automated verification with:
 
 ```bash
-# Build
-dotnet build -c Release
-
-# Pack (verifies package metadata)
-dotnet pack -c Release -o ./nupkg
-
-# Test (currently no tests)
-dotnet test --verbosity normal
+dotnet test --no-build --verbosity normal
 ```
+
+Build verification (compilation only):
+
+```bash
+dotnet build --no-restore
+```
+
+Material coverage gaps:
+
+- No integration tests (the library has no external integrations beyond the console and file system)
+- No performance or benchmark tests
+- No container or end-to-end consumer tests
 
 ## ⚠️ Design Constraints
 
@@ -335,7 +356,6 @@ dotnet test --verbosity normal
 - **Local time only**: `DateTime.Now` used for timestamps; no UTC option; timezone offset included via `K` format specifier
 - **No structured logging**: Output is formatted string; no JSON, no property bags, no structured sinks
 - **No `ILogger` abstraction**: Uses custom `NuciLog.Core.Logger` base; not compatible with `Microsoft.Extensions.Logging.ILogger`
-- **No test coverage**: Regression risk for all behaviors; no CI validation of logic
 - **Format string validation at runtime**: Invalid `LogLineFormat` or `TimestampFormat` throw `FormatException` during logging, not at startup
 - **GPL-3.0-or-later license**: Copyleft; consumers must comply with GPL terms
 
@@ -376,6 +396,8 @@ dotnet test --verbosity normal
 | DI registration | `NuciLog/ServiceCollectionExtensions.cs` |
 | Configuration model | `NuciLog/Configuration/NuciLoggerSettings.cs` |
 | Project configuration | `NuciLog/NuciLog.csproj` |
+| Unit tests | `NuciLog.UnitTests/` |
+| Architecture tests | `NuciLog.ArchitectureTests/` |
 | CI/CD pipeline | `.github/workflows/dotnet.yml` |
 | User documentation | `README.md` |
 | License | `LICENSE` |

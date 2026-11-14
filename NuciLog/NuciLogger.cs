@@ -1,13 +1,20 @@
 ﻿using System;
 using System.IO;
+
 using NuciCLI;
+
 using NuciLog.Configuration;
 using NuciLog.Core;
 
 namespace NuciLog
 {
+    /// <summary>
+    /// Provides structured logging output to the console and, optionally, to a file.
+    /// </summary>
+    /// <param name="settings">The logger configuration.</param>
     public sealed class NuciLogger(NuciLoggerSettings settings) : Logger
     {
+        /// <inheritdoc />
         protected override void WriteLog(LogLevel level, Func<string> logMessage)
         {
             if (level > settings.MinimumLevel)
@@ -17,7 +24,12 @@ namespace NuciLog
 
             string timestamp = DateTime.Now.ToString(settings.TimestampFormat);
             string logLevel = level.ToString().ToUpper();
-            string formattedLog = string.Format(settings.LogLineFormat, timestamp, SourceContext, logLevel, logMessage());
+            string formattedLog = string.Format(
+                settings.LogLineFormat,
+                timestamp,
+                SourceContext,
+                logLevel,
+                logMessage());
 
             NuciConsole.WriteLine(formattedLog);
 
