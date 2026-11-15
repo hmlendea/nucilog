@@ -218,6 +218,19 @@ dotnet test
 4. Build
 5. Test
 
+**File**: `.github/workflows/security.yml`
+
+**Triggers**: Push/PR to master plus a weekly schedule (weekly code scanning)
+
+**Steps**:
+1. Checkout
+2. Setup .NET 10.0.x
+3. Restore
+4. Vulnerable package check
+5. CodeQL init (csharp)
+6. Build
+7. CodeQL analyse
+
 ---
 
 ## Version History
@@ -288,7 +301,8 @@ dotnet test
 
 ```
 nucilog/
-├── .github/workflows/dotnet.yml    # CI/CD
+├── .github/workflows/dotnet.yml    # CI
+├── .github/workflows/security.yml  # Code scanning
 ├── NuciLog.sln                     # Solution
 ├── NuciLog/                        # Main project
 │   ├── NuciLog.csproj              # Project config

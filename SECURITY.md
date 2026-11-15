@@ -6,6 +6,7 @@ NuciLog is a .NET logging library distributed via NuGet. This policy covers vuln
 
 - Supported Versions
 - Reporting a Vulnerability
+- Automated Security Scanning
 - Scope
 - Disclosure Policy
 - Safe Harbour
@@ -29,12 +30,20 @@ To report a vulnerability:
 - [GitHub Security Advisories](https://github.com/hmlendea/nucilog/security/advisories)
 - Contact the maintainers directly via GitHub issues at https://github.com/hmlendea/nucilog/issues
 
+## 🔍 Automated Security Scanning
+
+This repository runs automated security scans on the NuciLog .NET codebase and its dependencies. The scan includes:
+- **CodeQL analysis for C#**
+- **Vulnerable package check** (`dotnet list package --vulnerable --include-transitive`)
+
+Results are published to the [Security](https://github.com/hmlendea/nucilog/security) tab and the [Actions](https://github.com/hmlendea/nucilog/actions/workflows/security.yml) workflow page.
+
 ## 📌 Scope
 
 The subsequent report categories are in scope for this repository:
 - Vulnerabilities in NuciLog source code (NuciLogger.cs, ServiceCollectionExtensions.cs, NuciLoggerSettings.cs)
 - Vulnerabilities in the NuciLog.csproj build configuration or packaging
-- Vulnerabilities in the GitHub Actions workflow (.github/workflows/dotnet.yml)
+- Vulnerabilities in the GitHub Actions workflows (.github/workflows/dotnet.yml, .github/workflows/security.yml, .github/workflows/github-release.yml, .github/workflows/nuget-release.yml)
 
 The subsequent categories are out of scope unless explicitly stated to the contrary:
 - Vulnerabilities in transitive dependencies (NuciLog.Core, NuciCLI, Microsoft.Extensions.* packages) — report to their respective maintainers
