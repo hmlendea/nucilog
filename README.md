@@ -191,8 +191,8 @@ The subsequent settings are recognised:
 | Microsoft.Extensions.Configuration | .NET 10.0+ | Binds `NuciLoggerSettings` from `IConfiguration` | Yes |
 | Microsoft.Extensions.DependencyInjection | .NET 10.0+ | Registers `NuciLoggerSettings` and `NuciLogger` via `IServiceCollection` | Yes |
 | Microsoft.Extensions.Options | .NET 10.0+ | Implements Options pattern for typed settings access | Yes |
-| NuciCLI | 3.0.1+ | Provides colored console output via `NuciConsole.WriteLine` | Yes |
-| NuciLog.Core | 3.0.0+ | Provides abstract `Logger` base class and `LogLevel` enum | Yes |
+| NuciCLI | 3.0.3+ | Provides colored console output via `NuciConsole.WriteLine` | Yes |
+| NuciLog.Core | 3.1.1+ | Provides abstract `Logger` base class and `LogLevel` enum | Yes |
 
 ## 🧱 Extensibility
 

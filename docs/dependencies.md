@@ -4,78 +4,78 @@
 
 | Package | Version | Purpose | License |
 |---------|---------|---------|---------|
-| Microsoft.Extensions.Configuration.Abstractions | 10.0.9 | `IConfiguration`, `GetSection` | MIT |
-| Microsoft.Extensions.DependencyInjection.Abstractions | 10.0.9 | `IServiceCollection`, DI interfaces | MIT |
-| Microsoft.Extensions.Options.ConfigurationExtensions | 10.0.9 | `services.Configure<>`, `IOptions<>` | MIT |
-| Microsoft.SourceLink.GitHub | 10.0.300 | SourceLink for NuGet debugging | MIT |
-| NuciCLI | 3.0.1 | `NuciConsole.WriteLine` (colored console) | GPL-3.0-or-later |
-| NuciLog.Core | 3.0.0 | `Logger` base class, `LogLevel` enum | GPL-3.0-or-later |
+| Microsoft.Extensions.Configuration.Abstractions | 11.0.0 | `IConfiguration`, `GetSection` | MIT |
+| Microsoft.Extensions.DependencyInjection.Abstractions | 11.0.0 | `IServiceCollection`, DI interfaces | MIT |
+| Microsoft.Extensions.Options.ConfigurationExtensions | 11.0.0 | `services.Configure<>`, `IOptions<>` | MIT |
+| Microsoft.SourceLink.GitHub | 11.0.100 | SourceLink for NuGet debugging | MIT |
+| NuciCLI | 3.0.3 | `NuciConsole.WriteLine` (colored console) | GPL-3.0-or-later |
+| NuciLog.Core | 3.1.1 | `Logger` base class, `LogLevel` enum | GPL-3.0-or-later |
 
 ## Transitive Dependencies
 
-### From Microsoft.Extensions.Configuration.Abstractions (10.0.9)
+### From Microsoft.Extensions.Configuration.Abstractions (11.0.0)
 | Package | Version | Purpose |
 |---------|---------|---------|
-| Microsoft.Extensions.Primitives | 10.0.9 | `StringValues`, `StringSegment` |
+| Microsoft.Extensions.Primitives | 11.0.0 | `StringValues`, `StringSegment` |
 
-### From Microsoft.Extensions.Configuration (10.0.9) - via Binder
+### From Microsoft.Extensions.Configuration (11.0.0) - via Binder
 | Package | Version | Purpose |
 |---------|---------|---------|
-| Microsoft.Extensions.Configuration.Abstractions | 10.0.9 | (already listed) |
-| Microsoft.Extensions.Primitives | 10.0.9 | (already listed) |
+| Microsoft.Extensions.Configuration.Abstractions | 11.0.0 | (already listed) |
+| Microsoft.Extensions.Primitives | 11.0.0 | (already listed) |
 
-### From Microsoft.Extensions.Configuration.Binder (10.0.9) - via Options.ConfigurationExtensions
+### From Microsoft.Extensions.Configuration.Binder (11.0.0) - via Options.ConfigurationExtensions
 | Package | Version | Purpose |
 |---------|---------|---------|
-| Microsoft.Extensions.Configuration | 10.0.9 | Configuration root |
-| Microsoft.Extensions.Configuration.Abstractions | 10.0.9 | (already listed) |
+| Microsoft.Extensions.Configuration | 11.0.0 | Configuration root |
+| Microsoft.Extensions.Configuration.Abstractions | 11.0.0 | (already listed) |
 
-### From Microsoft.Extensions.Options (10.0.9) - via Options.ConfigurationExtensions
+### From Microsoft.Extensions.Options (11.0.0) - via Options.ConfigurationExtensions
 | Package | Version | Purpose |
 |---------|---------|---------|
-| Microsoft.Extensions.DependencyInjection.Abstractions | 10.0.9 | (already listed) |
-| Microsoft.Extensions.Primitives | 10.0.9 | (already listed) |
+| Microsoft.Extensions.DependencyInjection.Abstractions | 11.0.0 | (already listed) |
+| Microsoft.Extensions.Primitives | 11.0.0 | (already listed) |
 
-### From Microsoft.SourceLink.GitHub (10.0.300)
+### From Microsoft.SourceLink.GitHub (11.0.100)
 | Package | Version | Purpose |
 |---------|---------|---------|
-| Microsoft.SourceLink.Common | 10.0.300 | Common SourceLink infrastructure |
-| Microsoft.Build.Tasks.Git | 10.0.300 | Git tasks for SourceLink |
+| Microsoft.SourceLink.Common | 11.0.100 | Common SourceLink infrastructure |
+| Microsoft.Build.Tasks.Git | 11.0.100 | Git tasks for SourceLink |
 
-### From Microsoft.Build.Tasks.Git (10.0.300)
+### From Microsoft.Build.Tasks.Git (11.0.100)
 | Package | Version | Purpose |
 |---------|---------|---------|
-| System.IO.Hashing | 10.0.8 | Hashing algorithms (xxHash, etc.) |
+| System.IO.Hashing | 11.0.0 | Hashing algorithms (xxHash, etc.) |
 
-### From NuciCLI (3.0.1)
+### From NuciCLI (3.0.3)
 | Package | Version | Purpose |
 |---------|---------|---------|
-| NuciExtensions | 5.3.1 | Extension methods for NuciCLI |
+| NuciExtensions | 6.0.2 | Extension methods for NuciCLI |
 
 ## Dependency Graph
 
 ```
 NuciLog (1.2.1, net10.0)
-├── Microsoft.Extensions.Configuration.Abstractions (10.0.9)
-│   └── Microsoft.Extensions.Primitives (10.0.9)
-├── Microsoft.Extensions.DependencyInjection.Abstractions (10.0.9)
-├── Microsoft.Extensions.Options.ConfigurationExtensions (10.0.9)
-│   ├── Microsoft.Extensions.Configuration (10.0.9)
-│   │   ├── Microsoft.Extensions.Configuration.Abstractions (10.0.9)
-│   │   └── Microsoft.Extensions.Primitives (10.0.9)
-│   ├── Microsoft.Extensions.Configuration.Binder (10.0.9)
-│   │   ├── Microsoft.Extensions.Configuration (10.0.9)
-│   │   └── Microsoft.Extensions.Configuration.Abstractions (10.0.9)
-│   └── Microsoft.Extensions.Options (10.0.9)
-│       ├── Microsoft.Extensions.DependencyInjection.Abstractions (10.0.9)
-│       └── Microsoft.Extensions.Primitives (10.0.9)
-├── Microsoft.SourceLink.GitHub (10.0.300) [PrivateAssets=all]
-│   ├── Microsoft.SourceLink.Common (10.0.300)
-│   └── Microsoft.Build.Tasks.Git (10.0.300)
-│       └── System.IO.Hashing (10.0.8)
-├── NuciCLI (3.0.1)
-│   └── NuciExtensions (5.3.1)
-└── NuciLog.Core (3.0.0)
+├── Microsoft.Extensions.Configuration.Abstractions (11.0.0)
+│   └── Microsoft.Extensions.Primitives (11.0.0)
+├── Microsoft.Extensions.DependencyInjection.Abstractions (11.0.0)
+├── Microsoft.Extensions.Options.ConfigurationExtensions (11.0.0)
+│   ├── Microsoft.Extensions.Configuration (11.0.0)
+│   │   ├── Microsoft.Extensions.Configuration.Abstractions (11.0.0)
+│   │   └── Microsoft.Extensions.Primitives (11.0.0)
+│   ├── Microsoft.Extensions.Configuration.Binder (11.0.0)
+│   │   ├── Microsoft.Extensions.Configuration (11.0.0)
+│   │   └── Microsoft.Extensions.Configuration.Abstractions (11.0.0)
+│   └── Microsoft.Extensions.Options (11.0.0)
+│       ├── Microsoft.Extensions.DependencyInjection.Abstractions (11.0.0)
+│       └── Microsoft.Extensions.Primitives (11.0.0)
+├── Microsoft.SourceLink.GitHub (11.0.100) [PrivateAssets=all]
+│   ├── Microsoft.SourceLink.Common (11.0.100)
+│   └── Microsoft.Build.Tasks.Git (11.0.100)
+│       └── System.IO.Hashing (11.0.0)
+├── NuciCLI (3.0.3)
+│   └── NuciExtensions (6.0.2)
+└── NuciLog.Core (3.1.1)
 ```
 
 ## Dependency Analysis
@@ -110,9 +110,9 @@ NuciLog (1.2.1, net10.0)
 
 | NuciLog | .NET | Config.Abstractions | DI.Abstractions | Options.ConfigExt | NuciCLI | NuciLog.Core |
 |---------|------|---------------------|-----------------|-------------------|---------|--------------|
-| 1.2.1 | 10.0 | 10.0.9 | 10.0.9 | 10.0.9 | 3.0.1 | 3.0.0 |
+| 1.2.1 | 10.0 | 11.0.0 | 11.0.0 | 11.0.0 | 3.0.3 | 3.1.1 |
 
-**Policy**: All Microsoft.Extensions packages aligned to same version (10.0.9)
+**Policy**: All Microsoft.Extensions packages aligned to same version (11.0.0)
 
 ## License Compatibility
 
@@ -129,14 +129,9 @@ NuciLog (1.2.1, net10.0)
 
 ## Vulnerability Status
 
-**Known Issue**: `Microsoft.Build.Tasks.Git 10.0.300` - Moderate severity (GHSA-23fw-v26w-5fgq)
+**Status**: No known vulnerable packages (`dotnet list package --vulnerable --include-transitive` reports none for any project).
 
-**Impact**: Build-time only (PrivateAssets=all), not in runtime output
-
-**Mitigation**:
-- Update when fixed version available
-- Or pin to older version without vulnerability
-- Does not affect NuciLog.dll consumers
+The previously reported `Microsoft.Build.Tasks.Git` advisory (GHSA-23fw-v26w-5fgq) is resolved by the 11.0.100 update.
 
 ## Package Size Analysis
 
@@ -197,18 +192,18 @@ Would require:
 When a project references NuciLog 1.2.1, it gets:
 
 **Direct Dependencies Added**:
-- Microsoft.Extensions.Configuration.Abstractions ≥ 10.0.9
-- Microsoft.Extensions.DependencyInjection.Abstractions ≥ 10.0.9
-- Microsoft.Extensions.Options.ConfigurationExtensions ≥ 10.0.9
-- NuciCLI ≥ 3.0.1
-- NuciLog.Core ≥ 3.0.0
+- Microsoft.Extensions.Configuration.Abstractions ≥ 11.0.0
+- Microsoft.Extensions.DependencyInjection.Abstractions ≥ 11.0.0
+- Microsoft.Extensions.Options.ConfigurationExtensions ≥ 11.0.0
+- NuciCLI ≥ 3.0.3
+- NuciLog.Core ≥ 3.1.1
 
 **Transitive Dependencies Added**:
-- Microsoft.Extensions.Primitives ≥ 10.0.9
-- Microsoft.Extensions.Configuration ≥ 10.0.9
-- Microsoft.Extensions.Configuration.Binder ≥ 10.0.9
-- Microsoft.Extensions.Options ≥ 10.0.9
-- NuciExtensions ≥ 5.3.1
+- Microsoft.Extensions.Primitives ≥ 11.0.0
+- Microsoft.Extensions.Configuration ≥ 11.0.0
+- Microsoft.Extensions.Configuration.Binder ≥ 11.0.0
+- Microsoft.Extensions.Options ≥ 11.0.0
+- NuciExtensions ≥ 6.0.2
 
 **Version Conflicts Possible If**:
 - Consumer uses different Microsoft.Extensions versions
@@ -236,18 +231,18 @@ When a project references NuciLog 1.2.1, it gets:
 
 ```mermaid
 graph TD
-    NuciLog[NuciLog 1.2.1] --> ConfigAbs[Microsoft.Extensions.Configuration.Abstractions 10.0.9]
-    NuciLog --> DIAbs[Microsoft.Extensions.DependencyInjection.Abstractions 10.0.9]
-    NuciLog --> OptConfigExt[Microsoft.Extensions.Options.ConfigurationExtensions 10.0.9]
-    NuciLog --> SourceLink[Microsoft.SourceLink.GitHub 10.0.300]
-    NuciLog --> NuciCLI[NuciCLI 3.0.1]
-    NuciLog --> NuciCore[NuciLog.Core 3.0.0]
+    NuciLog[NuciLog 1.2.1] --> ConfigAbs[Microsoft.Extensions.Configuration.Abstractions 11.0.0]
+    NuciLog --> DIAbs[Microsoft.Extensions.DependencyInjection.Abstractions 11.0.0]
+    NuciLog --> OptConfigExt[Microsoft.Extensions.Options.ConfigurationExtensions 11.0.0]
+    NuciLog --> SourceLink[Microsoft.SourceLink.GitHub 11.0.100]
+    NuciLog --> NuciCLI[NuciCLI 3.0.3]
+    NuciLog --> NuciCore[NuciLog.Core 3.1.1]
 
-    ConfigAbs --> Primitives[Microsoft.Extensions.Primitives 10.0.9]
+    ConfigAbs --> Primitives[Microsoft.Extensions.Primitives 11.0.0]
 
-    OptConfigExt --> Config[Microsoft.Extensions.Configuration 10.0.9]
-    OptConfigExt --> Binder[Microsoft.Extensions.Configuration.Binder 10.0.9]
-    OptConfigExt --> Options[Microsoft.Extensions.Options 10.0.9]
+    OptConfigExt --> Config[Microsoft.Extensions.Configuration 11.0.0]
+    OptConfigExt --> Binder[Microsoft.Extensions.Configuration.Binder 11.0.0]
+    OptConfigExt --> Options[Microsoft.Extensions.Options 11.0.0]
 
     Config --> ConfigAbs
     Config --> Primitives
@@ -258,12 +253,12 @@ graph TD
     Options --> DIAbs
     Options --> Primitives
 
-    SourceLink --> SourceLinkCommon[Microsoft.SourceLink.Common 10.0.300]
-    SourceLink --> BuildTasksGit[Microsoft.Build.Tasks.Git 10.0.300]
+    SourceLink --> SourceLinkCommon[Microsoft.SourceLink.Common 11.0.100]
+    SourceLink --> BuildTasksGit[Microsoft.Build.Tasks.Git 11.0.100]
 
-    BuildTasksGit --> Hashing[System.IO.Hashing 10.0.8]
+    BuildTasksGit --> Hashing[System.IO.Hashing 11.0.0]
 
-    NuciCLI --> NuciExt[NuciExtensions 5.3.1]
+    NuciCLI --> NuciExt[NuciExtensions 6.0.2]
 
     classDef runtime fill:#e8f5e9,stroke:#2e7d32;
     classDef buildtime fill:#fff3e0,stroke:#ef6c00;

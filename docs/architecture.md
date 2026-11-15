@@ -94,12 +94,12 @@ builder.Services
 
 ```
 NuciLog (net10.0)
-├── Microsoft.Extensions.Configuration.Abstractions (10.0.9)
-├── Microsoft.Extensions.DependencyInjection.Abstractions (10.0.9)
-├── Microsoft.Extensions.Options.ConfigurationExtensions (10.0.9)
-├── Microsoft.SourceLink.GitHub (10.0.300) - dev only
-├── NuciCLI (3.0.1) - provides NuciConsole
-└── NuciLog.Core (3.0.0) - provides Logger base class & LogLevel enum
+├── Microsoft.Extensions.Configuration.Abstractions (11.0.0)
+├── Microsoft.Extensions.DependencyInjection.Abstractions (11.0.0)
+├── Microsoft.Extensions.Options.ConfigurationExtensions (11.0.0)
+├── Microsoft.SourceLink.GitHub (11.0.100) - dev only
+├── NuciCLI (3.0.3) - provides NuciConsole
+└── NuciLog.Core (3.1.1) - provides Logger base class & LogLevel enum
 ```
 
 ## Configuration Flow
@@ -193,10 +193,10 @@ logger.WithSourceContext("MyComponent").Log(LogLevel.Info, () => "Message");
 
 | Package | Purpose | Version |
 |---------|---------|---------|
-| NuciLog.Core | Base Logger class, LogLevel enum | 3.0.0 |
-| NuciCLI | NuciConsole for colored console output | 3.0.1 |
-| Microsoft.Extensions.* | DI, Configuration, Options | 10.0.9 |
-| Microsoft.SourceLink.GitHub | Source linking for NuGet | 10.0.300 |
+| NuciLog.Core | Base Logger class, LogLevel enum | 3.1.1 |
+| NuciCLI | NuciConsole for colored console output | 3.0.3 |
+| Microsoft.Extensions.* | DI, Configuration, Options | 11.0.0 |
+| Microsoft.SourceLink.GitHub | Source linking for NuGet | 11.0.100 |
 
 ## Known Limitations
 

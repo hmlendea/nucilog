@@ -243,12 +243,12 @@ public enum LogLevel
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.9" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.9" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.9" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300" PrivateAssets="all" />
-    <PackageReference Include="NuciCLI" Version="3.0.1" />
-    <PackageReference Include="NuciLog.Core" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="11.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="11.0.100" PrivateAssets="all" />
+    <PackageReference Include="NuciCLI" Version="3.0.3" />
+    <PackageReference Include="NuciLog.Core" Version="3.1.1" />
   </ItemGroup>
 </Project>
 ```
@@ -265,18 +265,18 @@ public enum LogLevel
 
 | Package | Version | Purpose |
 |---------|---------|---------|
-| Microsoft.Extensions.Configuration.Abstractions | 10.0.9 | `IConfiguration`, `GetSection` |
-| Microsoft.Extensions.DependencyInjection.Abstractions | 10.0.9 | `IServiceCollection`, `AddSingleton` |
-| Microsoft.Extensions.Options.ConfigurationExtensions | 10.0.9 | `services.Configure<>`, `IOptions<>` |
-| Microsoft.SourceLink.GitHub | 10.0.300 | SourceLink for debugging (dev only) |
-| NuciCLI | 3.0.1 | `NuciConsole.WriteLine` |
-| NuciLog.Core | 3.0.0 | `Logger` base class, `LogLevel` enum |
+| Microsoft.Extensions.Configuration.Abstractions | 11.0.0 | `IConfiguration`, `GetSection` |
+| Microsoft.Extensions.DependencyInjection.Abstractions | 11.0.0 | `IServiceCollection`, `AddSingleton` |
+| Microsoft.Extensions.Options.ConfigurationExtensions | 11.0.0 | `services.Configure<>`, `IOptions<>` |
+| Microsoft.SourceLink.GitHub | 11.0.100 | SourceLink for debugging (dev only) |
+| NuciCLI | 3.0.3 | `NuciConsole.WriteLine` |
+| NuciLog.Core | 3.1.1 | `Logger` base class, `LogLevel` enum |
 
 ---
 
 ## Base Class: NuciLog.Core.Logger (External)
 
-**Package**: `NuciLog.Core` v3.0.0
+**Package**: `NuciLog.Core` v3.1.1
 
 **Inferred Interface** (from usage in NuciLogger):
 ```csharp

@@ -265,12 +265,12 @@ flowchart TB
 
 | Dependency | Responsibility | Integration Boundary | Architectural Consequence |
 |------------|----------------|----------------------|---------------------------|
-| `NuciLog.Core` (3.0.0) | Abstract `Logger` base class, `LogLevel` enum | `NuciLogger` inherits `Logger`; overrides `WriteLog` | Base class controls `SourceContext`, `Log` method, `WithSourceContext`; NuciLog only implements output |
-| `NuciCLI` (3.0.1) | `NuciConsole.WriteLine` for colored console output | Direct static call in `NuciLogger.WriteLog` | Console output format/coloring controlled externally; no abstraction for testing |
-| `Microsoft.Extensions.Configuration.Abstractions` (10.0.9) | `IConfiguration`, `GetSection` | `ServiceCollectionExtensions` binds settings | Standard abstraction; any configuration provider works |
-| `Microsoft.Extensions.DependencyInjection.Abstractions` (10.0.9) | `IServiceCollection`, DI interfaces | `ServiceCollectionExtensions` registers services | Standard DI abstraction; works with any compatible container |
-| `Microsoft.Extensions.Options.ConfigurationExtensions` (10.0.9) | `services.Configure<>`, `IOptions<>` | Binds and registers `NuciLoggerSettings` | Options pattern enables validation, monitoring, snapshots |
-| `Microsoft.SourceLink.GitHub` (10.0.300) | SourceLink for NuGet debugging | Build-time only (`PrivateAssets=all`) | No runtime dependency; enables source debugging for consumers |
+| `NuciLog.Core` (3.1.1) | Abstract `Logger` base class, `LogLevel` enum | `NuciLogger` inherits `Logger`; overrides `WriteLog` | Base class controls `SourceContext`, `Log` method, `WithSourceContext`; NuciLog only implements output |
+| `NuciCLI` (3.0.3) | `NuciConsole.WriteLine` for colored console output | Direct static call in `NuciLogger.WriteLog` | Console output format/coloring controlled externally; no abstraction for testing |
+| `Microsoft.Extensions.Configuration.Abstractions` (11.0.0) | `IConfiguration`, `GetSection` | `ServiceCollectionExtensions` binds settings | Standard abstraction; any configuration provider works |
+| `Microsoft.Extensions.DependencyInjection.Abstractions` (11.0.0) | `IServiceCollection`, DI interfaces | `ServiceCollectionExtensions` registers services | Standard DI abstraction; works with any compatible container |
+| `Microsoft.Extensions.Options.ConfigurationExtensions` (11.0.0) | `services.Configure<>`, `IOptions<>` | Binds and registers `NuciLoggerSettings` | Options pattern enables validation, monitoring, snapshots |
+| `Microsoft.SourceLink.GitHub` (11.0.100) | SourceLink for NuGet debugging | Build-time only (`PrivateAssets=all`) | No runtime dependency; enables source debugging for consumers |
 
 ## 🚀 Deployment and Operations
 

@@ -454,7 +454,7 @@ dotnet run --NuciLoggerSettings:MinimumLevel=Debug
 
 | NuciLog Version | .NET Version | NuciLog.Core | NuciCLI |
 |-----------------|--------------|--------------|---------|
-| 1.2.1 | net10.0 | 3.0.0 | 3.0.1 |
+| 1.2.1 | net10.0 | 3.1.1 | 3.0.3 |
 
 **Breaking Changes**: None documented (single major version)
 
