@@ -245,9 +245,9 @@ dotnet test
 
 | Package | Version | Purpose |
 |---------|---------|---------|
-| NuciLog.Core | 3.0.0 | Base Logger, LogLevel |
-| NuciCLI | 3.0.1 | NuciConsole, colored output |
-| NuciExtensions | 5.3.1 | Extensions (via NuciCLI) |
+| NuciLog.Core | 3.1.1 | Base Logger, LogLevel |
+| NuciCLI | 3.0.3 | NuciConsole, colored output |
+| NuciExtensions | 6.0.2 | Extensions (via NuciCLI) |
 
 ---
 

@@ -67,10 +67,10 @@ NuciLog.ArchitectureTests/
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.13" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.13" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.13" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="11.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
     <PackageReference Include="Moq" Version="4.21.0" />
     <PackageReference Include="NUnit" Version="5.0.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="6.3.1" />
@@ -102,8 +102,8 @@ NuciLog.ArchitectureTests/
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.12.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
     <PackageReference Include="NUnit" Version="5.0.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="6.3.1" />
     <PackageReference Include="TngTech.ArchUnitNET.NUnit" Version="0.13.5" />
