@@ -1,5 +1,6 @@
 [![Donate](https://img.shields.io/badge/-%E2%99%A5%20Donate-%23ff69b4)](https://hmlendea.go.ro/funding)
 [![Build Status](https://github.com/hmlendea/nucilog/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hmlendea/nucilog/actions/workflows/dotnet.yml)
+[![Security Scan](https://github.com/hmlendea/nucilog/actions/workflows/security.yml/badge.svg)](https://github.com/hmlendea/nucilog/actions/workflows/security.yml)
 [![Latest Release](https://img.shields.io/github/v/release/hmlendea/nucilog)](https://github.com/hmlendea/nucilog/releases/latest)
 [![License](https://img.shields.io/github/license/hmlendea/nucilog)](https://github.com/hmlendea/nucilog/blob/master/LICENSE)
 
@@ -260,6 +261,7 @@ No code generation is required or performed.
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
 | [ dotnet.yml ](https://github.com/hmlendea/nucilog/blob/master/.github/workflows/dotnet.yml) | .NET CI | Builds, tests, and packs the NuGet package on push to any branch and on pull request targeting the `master` branch |
+| [ security.yml ](https://github.com/hmlendea/nucilog/blob/master/.github/workflows/security.yml) | Security Scan | CodeQL analysis for C# and vulnerable package check, triggered on push and pull request targeting `master` plus a weekly schedule |
 
 ## 🗂️ Project Structure
 

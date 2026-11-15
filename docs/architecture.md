@@ -17,7 +17,8 @@ NuciLog/
 │       └── NuciLoggerSettings.cs  # Configuration model
 ├── NuciLog.UnitTests/             # Behavioural unit tests
 ├── NuciLog.ArchitectureTests/     # Architecture and convention fitness tests
-├── .github/workflows/dotnet.yml   # CI/CD pipeline
+├── .github/workflows/dotnet.yml   # CI pipeline
+├── .github/workflows/security.yml # CodeQL and vulnerable-package scan
 ├── README.md                      # User documentation
 ├── LICENSE                        # GPL-3.0-or-later
 └── docs/                          # This documentation
@@ -170,6 +171,14 @@ logger.WithSourceContext("MyComponent").Log(LogLevel.Info, () => "Message");
 - Build: Restore → Build → Test on ubuntu-latest with .NET 10.0.x
 
 **Tests**: `NuciLog.UnitTests` covers the logger and settings behaviour; `NuciLog.ArchitectureTests` enforces the dependency, source, project, and solution conventions.
+
+## Security Scan (.github/workflows/security.yml)
+
+**Triggers**: Push and pull request to master, plus a weekly schedule (Sundays at 00:00 UTC)
+
+**Job**: Security Scan on ubuntu-latest with .NET 10.0.x
+
+**Steps**: Restore → Vulnerable package check (`dotnet list package --vulnerable --include-transitive`) → CodeQL init (csharp) → Build → CodeQL analyse (SARIF uploaded to GitHub Code Scanning via `security-events: write`)
 
 ## Versioning & Packaging
 
